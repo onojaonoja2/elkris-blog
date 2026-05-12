@@ -63,13 +63,17 @@
                                 <span class="material-symbols-outlined text-[18px]">edit</span>
                             </a>
                             @if($user->id !== auth()->id())
-                            <form method="POST" action="{{ route('admin.users.destroy', $user) }}" onsubmit="return confirm('Delete this user and all their posts?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="p-2 rounded-lg text-error hover:bg-error-container transition-colors" title="Delete">
-                                    <span class="material-symbols-outlined text-[18px]">delete</span>
-                                </button>
-                            </form>
+                            <button type="button" class="p-2 rounded-lg text-error hover:bg-error-container transition-colors" title="Delete"
+                                @click="confirmModal = {
+                                    show: true,
+                                    title: 'Delete User',
+                                    message: 'Delete this user and all their posts? This action cannot be undone.',
+                                    action: '{{ route('admin.users.destroy', $user) }}',
+                                    method: 'DELETE',
+                                    buttonText: 'Delete'
+                                }">
+                                <span class="material-symbols-outlined text-[18px]">delete</span>
+                            </button>
                             @endif
                         </div>
                     </td>

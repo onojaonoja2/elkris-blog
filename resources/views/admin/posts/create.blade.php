@@ -4,7 +4,7 @@
 @section('header', 'Create New Post')
 
 @section('content')
-<form method="POST" action="{{ route('admin.posts.store') }}" enctype="multipart/form-data" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<form method="POST" action="{{ route('admin.posts.store') }}" enctype="multipart/form-data" class="grid grid-cols-1 lg:grid-cols-3 gap-8" id="post-form">
     @csrf
 
     {{-- Main Editor --}}
@@ -56,8 +56,11 @@
     <div class="space-y-6">
         <div class="bg-white rounded-xl border border-surface-variant shadow-sm p-6 space-y-4 sticky top-24">
             <div class="flex gap-3">
-                <button type="submit" id="publish-btn" name="is_published" value="1" class="flex-1 bg-secondary text-white font-bold px-6 py-3 rounded-lg hover:bg-on-secondary-container transition-all text-ui-label">Publish</button>
+                <button type="button"
+                    class="flex-1 bg-secondary text-white font-bold px-6 py-3 rounded-lg hover:bg-on-secondary-container transition-all text-ui-label"
+                    @click="publishModal = { show: true }">Publish</button>
                 <button type="submit" name="is_published" value="0" class="flex-1 border border-outline-variant text-on-surface-variant font-bold px-6 py-3 rounded-lg hover:bg-surface-container-high transition-all text-ui-label">Save Draft</button>
+                <button type="submit" name="is_published" value="1" id="publish-submit-btn" class="hidden"></button>
             </div>
 
             <div>

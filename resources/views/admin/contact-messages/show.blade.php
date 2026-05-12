@@ -33,11 +33,15 @@
 
     <div class="mt-6 flex items-center gap-3">
         <a href="{{ route('admin.contact-messages.index') }}" class="text-outline hover:text-on-surface transition-colors text-ui-label">&larr; Back to Messages</a>
-        <form method="POST" action="{{ route('admin.contact-messages.destroy', $contactMessage) }}" onsubmit="return confirm('Delete this message?')" class="ml-auto">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="border border-error text-error font-bold px-5 py-2 rounded-lg hover:bg-error-container transition-all text-ui-label">Delete</button>
-        </form>
+        <button type="button" class="border border-error text-error font-bold px-5 py-2 rounded-lg hover:bg-error-container transition-all text-ui-label ml-auto"
+            @click="confirmModal = {
+                show: true,
+                title: 'Delete Message',
+                message: 'Delete this contact message?',
+                action: '{{ route('admin.contact-messages.destroy', $contactMessage) }}',
+                method: 'DELETE',
+                buttonText: 'Delete'
+            }">Delete</button>
     </div>
 </div>
 @endsection

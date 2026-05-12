@@ -61,11 +61,17 @@
     </form>
 
     @if($user->id !== auth()->id())
-    <form method="POST" action="{{ route('admin.users.destroy', $user) }}" onsubmit="return confirm('Delete this user and all their posts? This action cannot be undone.')" class="mt-6">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="w-full border border-error text-error font-bold px-6 py-3 rounded-lg hover:bg-error-container transition-all text-ui-label">Delete User</button>
-    </form>
+    <button type="button" class="w-full border border-error text-error font-bold px-6 py-3 rounded-lg hover:bg-error-container transition-all text-ui-label mt-6"
+        @click="confirmModal = {
+            show: true,
+            title: 'Delete User',
+            message: 'Delete this user and all their posts? This action cannot be undone.',
+            action: '{{ route('admin.users.destroy', $user) }}',
+            method: 'DELETE',
+            buttonText: 'Delete'
+        }">
+        Delete User
+    </button>
     @endif
 </div>
 @endsection

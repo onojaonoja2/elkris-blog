@@ -22,6 +22,7 @@ class Post extends Model
         'published_at',
         'seo_title',
         'seo_description',
+        'views_count',
     ];
 
     protected function casts(): array
@@ -29,6 +30,7 @@ class Post extends Model
         return [
             'is_published' => 'boolean',
             'published_at' => 'datetime',
+            'views_count' => 'integer',
         ];
     }
 

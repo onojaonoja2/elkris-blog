@@ -35,11 +35,15 @@
                     </td>
                     <td class="px-6 py-4 text-caption text-on-surface-variant">{{ $subscriber->created_at->format('M j, Y g:i A') }}</td>
                     <td class="px-6 py-4">
-                        <form method="POST" action="{{ route('admin.newsletter-subscribers.destroy', $subscriber) }}" onsubmit="return confirm('Remove this subscriber?')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-error text-ui-label hover:underline">Remove</button>
-                        </form>
+                        <button type="button" class="text-error text-ui-label hover:underline"
+                            @click="confirmModal = {
+                                show: true,
+                                title: 'Remove Subscriber',
+                                message: 'Remove this subscriber? They will no longer receive newsletters.',
+                                action: '{{ route('admin.newsletter-subscribers.destroy', $subscriber) }}',
+                                method: 'DELETE',
+                                buttonText: 'Remove'
+                            }">Remove</button>
                     </td>
                 </tr>
                 @empty

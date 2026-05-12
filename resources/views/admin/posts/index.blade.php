@@ -23,6 +23,7 @@
                 @if(Auth::user()->isAdmin())
                 <th class="text-left px-6 py-4 text-ui-label font-bold text-primary hidden md:table-cell">Author</th>
                 @endif
+                <th class="text-left px-6 py-4 text-ui-label font-bold text-primary">Views</th>
                 <th class="text-left px-6 py-4 text-ui-label font-bold text-primary">Status</th>
                 <th class="text-left px-6 py-4 text-ui-label font-bold text-primary hidden lg:table-cell">Date</th>
                 <th class="text-right px-6 py-4 text-ui-label font-bold text-primary">Actions</th>
@@ -38,6 +39,7 @@
                 @if(Auth::user()->isAdmin())
                 <td class="px-6 py-4 text-ui-label text-on-surface-variant hidden md:table-cell">{{ $post->author?->name }}</td>
                 @endif
+                <td class="px-6 py-4 text-ui-label text-outline">{{ number_format($post->views_count) }}</td>
                 <td class="px-6 py-4">
                     @if($post->is_published)
                     <span class="inline-flex items-center px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed text-caption font-medium">Published</span>
@@ -54,19 +56,23 @@
                         <a href="{{ route('admin.posts.edit', $post) }}" class="p-2 text-outline hover:text-secondary transition-colors" title="Edit">
                             <span class="material-symbols-outlined">edit</span>
                         </a>
-                        <form method="POST" action="{{ route('admin.posts.destroy', $post) }}" onsubmit="return confirm('Delete this post?')" class="inline">
-                            @csrf
-                            @method('DELETE')
-                            <button class="p-2 text-outline hover:text-error transition-colors" title="Delete">
-                                <span class="material-symbols-outlined">delete</span>
-                            </button>
-                        </form>
+                        <button class="p-2 text-outline hover:text-error transition-colors" title="Delete"
+                            @click="confirmModal = {
+                                show: true,
+                                title: 'Delete Post',
+                                message: 'Delete this post? This action cannot be undone.',
+                                action: '{{ route('admin.posts.destroy', $post) }}',
+                                method: 'DELETE',
+                                buttonText: 'Delete'
+                            }">
+                            <span class="material-symbols-outlined">delete</span>
+                        </button>
                     </div>
                 </td>
             </tr>
             @empty
             <tr>
-                <td colspan="{{ Auth::user()->isAdmin() ? 6 : 5 }}" class="px-6 py-12 text-center">
+                <td colspan="{{ Auth::user()->isAdmin() ? 7 : 6 }}" class="px-6 py-12 text-center">
                     <span class="material-symbols-outlined text-5xl text-outline-variant mb-2 block">article</span>
                     <p class="text-on-surface-variant text-ui-label">No posts yet.</p>
                     <a href="{{ route('admin.posts.create') }}" class="text-secondary hover:underline text-ui-label mt-2 inline-block">Create your first post</a>

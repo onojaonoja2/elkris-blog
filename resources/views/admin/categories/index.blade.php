@@ -51,13 +51,17 @@
                     <button onclick="editCategory({{ $cat->id }}, '{{ $cat->name }}', '{{ $cat->description }}', {{ $cat->is_active ? 'true' : 'false' }})" class="p-2 text-outline hover:text-secondary transition-colors">
                         <span class="material-symbols-outlined">edit</span>
                     </button>
-                    <form method="POST" action="{{ route('admin.categories.destroy', $cat) }}" onsubmit="return confirm('Delete this category?')" class="inline">
-                        @csrf
-                        @method('DELETE')
-                        <button class="p-2 text-outline hover:text-error transition-colors">
-                            <span class="material-symbols-outlined">delete</span>
-                        </button>
-                    </form>
+                    <button type="button" class="p-2 text-outline hover:text-error transition-colors"
+                        @click="confirmModal = {
+                            show: true,
+                            title: 'Delete Category',
+                            message: 'Delete this category? Posts in this category will become uncategorized.',
+                            action: '{{ route('admin.categories.destroy', $cat) }}',
+                            method: 'DELETE',
+                            buttonText: 'Delete'
+                        }">
+                        <span class="material-symbols-outlined">delete</span>
+                    </button>
                 </div>
             </div>
             @empty

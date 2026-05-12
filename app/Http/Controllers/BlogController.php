@@ -31,6 +31,8 @@ class BlogController extends Controller
             abort(404);
         }
 
+        $post->increment('views_count');
+
         $relatedPosts = Post::published()
             ->where('id', '!=', $post->id)
             ->where(function ($q) use ($post) {

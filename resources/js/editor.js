@@ -181,5 +181,4 @@ document.addEventListener('DOMContentLoaded', () => {
     initFeaturedImageUpload();
     initSlugGenerator();
     initAutoSave();
-    confirmPublish();
 });
