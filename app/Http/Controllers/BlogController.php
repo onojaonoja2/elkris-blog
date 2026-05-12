@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
@@ -77,6 +78,42 @@ class BlogController extends Controller
     {
         $categories = Category::active()->get();
 
-        return view('blog.resources', compact('categories'));
+        $resources = [
+            [
+                'key' => 'nutrition-manual',
+                'title' => 'The Nutrition & Healthy Living Manual',
+                'description' => 'A comprehensive guide covering evidence-based nutrition, meal planning, and lifestyle modifications for optimal health.',
+                'page_count' => 24,
+                'file_size' => '2.4 MB',
+                'featured' => true,
+            ],
+            [
+                'key' => 'glycemic-index-chart',
+                'title' => 'Glycemic Index Reference Chart',
+                'description' => 'Quick-reference chart of common Nigerian foods and their glycemic impact.',
+                'page_count' => 2,
+                'file_size' => null,
+                'featured' => false,
+            ],
+        ];
+
+        return view('blog.resources', compact('categories', 'resources'));
+    }
+
+    public function downloadResource(string $resource)
+    {
+        $path = "resources/{$resource}.pdf";
+
+        if (! Storage::disk('public')->exists($path)) {
+            abort(404);
+        }
+
+        $displayName = match ($resource) {
+            'nutrition-manual' => 'Nutrition_and_Healthy_Living_Manual.pdf',
+            'glycemic-index-chart' => 'Glycemic_Index_Reference_Chart.pdf',
+            default => "{$resource}.pdf",
+        };
+
+        return Storage::disk('public')->download($path, $displayName);
     }
 }

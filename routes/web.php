@@ -15,6 +15,7 @@ Route::get('/blog/{post:slug}', [BlogController::class, 'show'])->name('blog.sho
 Route::get('/category/{category:slug}', [BlogController::class, 'category'])->name('blog.category');
 Route::get('/tag/{tag:slug}', [BlogController::class, 'tag'])->name('blog.tag');
 Route::get('/resources', [BlogController::class, 'resources'])->name('blog.resources');
+Route::get('/resources/{resource}/download', [BlogController::class, 'downloadResource'])->name('blog.resources.download');
 Route::post('/newsletter', [NewsletterController::class, 'store'])->name('newsletter.store');
 
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {

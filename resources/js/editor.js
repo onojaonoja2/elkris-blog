@@ -8,8 +8,11 @@ const initializeEditor = () => {
     const editorElement = document.getElementById('tiptap-editor');
     if (!editorElement) return false;
 
+    const initialContent = editorElement.dataset.initialBody || '';
+
     const editor = new Editor({
         element: editorElement,
+        content: initialContent,
         extensions: [
             StarterKit.configure({
                 heading: { levels: [2, 3] },
@@ -32,6 +35,12 @@ const initializeEditor = () => {
             attributes: {
                 class: 'prose prose-lg max-w-none focus:outline-none min-h-[500px] px-0 font-article text-article-body',
             },
+        },
+        onCreate: ({ editor }) => {
+            const hiddenInput = document.getElementById('body-content');
+            if (hiddenInput) {
+                hiddenInput.value = editor.getHTML();
+            }
         },
         onUpdate: ({ editor }) => {
             const hiddenInput = document.getElementById('body-content');

@@ -31,31 +31,36 @@
 <section id="downloads" class="max-w-[1280px] mx-auto px-5 py-section-gap">
     <h2 class="font-headline-md text-[32px] font-semibold text-primary-container mb-8">Scientific Downloads</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="md:col-span-2 bg-white rounded-xl border border-surface-variant shadow-sm overflow-hidden flex flex-col md:flex-row">
+        @foreach($resources as $resource)
+        <div class="@if($loop->first) md:col-span-2 @endif bg-white rounded-xl border border-surface-variant shadow-sm overflow-hidden flex flex-col @if($loop->first) md:flex-row @endif">
+            @if($resource['featured'])
             <div class="md:w-2/5 bg-surface-container-high p-8 flex items-center justify-center">
                 <span class="material-symbols-outlined text-primary-container text-8xl">picture_as_pdf</span>
             </div>
             <div class="md:w-3/5 p-8 flex flex-col justify-between">
+            @else
+            <div class="p-8 flex flex-col h-full">
+            @endif
                 <div>
+                    @if($resource['featured'])
                     <span class="bg-secondary-container text-on-secondary-container text-caption font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Featured</span>
-                    <h3 class="font-headline-sm text-[24px] font-semibold text-primary mt-3 mb-2">The Nutrition & Healthy Living Manual</h3>
-                    <p class="text-on-surface-variant text-ui-label">A comprehensive guide covering evidence-based nutrition, meal planning, and lifestyle modifications for optimal health.</p>
+                    @else
+                    <span class="material-symbols-outlined text-secondary text-4xl mb-4">monitoring</span>
+                    @endif
+                    <h3 class="font-headline-sm text-[24px] font-semibold text-primary mt-3 mb-2">{{ $resource['title'] }}</h3>
+                    <p class="text-on-surface-variant text-ui-label @if(!$resource['featured']) flex-1 @endif">{{ $resource['description'] }}</p>
                 </div>
-                <div class="flex items-center gap-4 mt-6 pt-6 border-t border-outline-variant">
-                    <span class="text-caption text-outline">PDF &bull; 24 pages &bull; 2.4 MB</span>
-                    <button class="ml-auto bg-primary-container text-on-primary px-6 py-2 rounded-lg font-ui-label text-ui-label hover:bg-secondary transition-all text-sm">Download</button>
+                <div class="flex items-center gap-4 mt-6 pt-6 border-t border-outline-variant @if(!$resource['featured']) mt-auto @endif">
+                    <span class="text-caption text-outline">PDF &bull; {{ $resource['page_count'] }} pages{{ $resource['file_size'] ? ' &bull; '.$resource['file_size'] : '' }}</span>
+                    <a href="{{ route('blog.resources.download', $resource['key']) }}" class="ml-auto @if($resource['featured']) bg-primary-container text-on-primary px-6 py-2 rounded-lg font-ui-label text-ui-label hover:bg-secondary transition-all text-sm @else text-secondary font-bold text-ui-label hover:underline @endif">Download</a>
                 </div>
+            @if($resource['featured'])
             </div>
-        </div>
-        <div class="bg-white rounded-xl border border-surface-variant shadow-sm p-8 flex flex-col">
-            <span class="material-symbols-outlined text-secondary text-4xl mb-4">monitoring</span>
-            <h3 class="font-headline-sm text-[24px] font-semibold text-primary mb-2">Glycemic Index Reference Chart</h3>
-            <p class="text-on-surface-variant text-ui-label flex-1">Quick-reference chart of common Nigerian foods and their glycemic impact.</p>
-            <div class="flex items-center gap-4 mt-6 pt-6 border-t border-outline-variant">
-                <span class="text-caption text-outline">PDF &bull; 2 pages</span>
-                <button class="ml-auto text-secondary font-bold text-ui-label hover:underline">Download</button>
+            @else
             </div>
+            @endif
         </div>
+        @endforeach
     </div>
 </section>
 

@@ -36,8 +36,8 @@
             </div>
 
             <div class="p-6">
-                <div id="tiptap-editor">{!! old('body', $post->body) !!}</div>
-                <input type="hidden" name="body" id="body-content" value="{{ old('body', $post->body) }}">
+                <div id="tiptap-editor" data-initial-body="{{ old('body', $post->body) }}"></div>
+                <input type="hidden" name="body" id="body-content" value="">
                 @error('body') <p class="text-error text-caption mt-1">{{ $message }}</p> @enderror
             </div>
         </div>
