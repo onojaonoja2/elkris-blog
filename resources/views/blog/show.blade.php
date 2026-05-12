@@ -135,6 +135,34 @@
 </div>
 </section>
 @endif
+
+{{-- Newsletter Section --}}
+<section class="mt-section-gap max-w-[1280px] mx-auto px-5">
+    <div class="bg-primary-container rounded-xl p-8 md:p-16 relative overflow-hidden flex flex-col md:flex-row items-center gap-12">
+        <div class="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none">
+            <svg class="w-full h-full translate-x-1/4 scale-150" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <path d="M44.7,-76.4C58.1,-69.2,69.5,-57.4,78.2,-43.8C86.9,-30.2,93,-15.1,91.8,-0.7C90.5,13.7,82.1,27.3,72.4,39.6C62.8,51.8,52,62.6,39.1,70.9C26.1,79.2,13.1,85,0.1,84.9C-12.9,84.8,-25.8,78.8,-38,71.2C-50.2,63.6,-61.7,54.4,-70.7,42.6C-79.6,30.8,-86,15.4,-86.7,-0.4C-87.3,-16.2,-82.2,-32.4,-73.2,-46.1C-64.2,-59.8,-51.3,-71,-37.2,-77.7C-23.1,-84.4,-7.8,-86.6,7.8,-90.1C23.4,-93.6,44.7,-83.5,44.7,-76.4Z" fill="#ffffff" transform="translate(100 100)"></path>
+            </svg>
+        </div>
+        <div class="relative z-10 md:w-1/2 text-center md:text-left">
+            <h2 class="font-display-lg-mobile md:font-display-lg text-[32px] md:text-[48px] leading-tight font-bold text-primary-fixed mb-4">Vitality Newsletter</h2>
+            <p class="font-article text-primary-fixed-dim opacity-90 max-w-md">Join health professionals receiving weekly evidence-based wellness briefings delivered directly to your inbox.</p>
+        </div>
+        <div class="relative z-10 md:w-1/2 w-full">
+            <form class="flex flex-col gap-4" method="POST" action="{{ route('newsletter.store') }}">
+                @csrf
+                <div class="flex flex-col gap-1">
+                    <label class="text-white text-ui-label mb-1" for="email-sub">Professional Email Address</label>
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <input class="flex-grow bg-white border border-outline-variant px-6 py-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary text-primary-container text-ui-label" id="email-sub" placeholder="email@example.com" type="email" name="email" required/>
+                        <button class="bg-secondary text-white font-bold px-8 py-4 rounded-lg hover:bg-on-secondary-container transition-all shadow-lg text-ui-label" type="submit">Subscribe</button>
+                    </div>
+                </div>
+                <p class="text-on-primary-container text-caption">By subscribing, you agree to our <a class="underline" href="#">Privacy Policy</a>. No spam, only science.</p>
+            </form>
+        </div>
+    </div>
+</section>
 @endsection
 
 @push('scripts')

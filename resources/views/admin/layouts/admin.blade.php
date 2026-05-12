@@ -6,6 +6,8 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 <title>@yield('title', 'Admin - Elkris Bio Health')</title>
+<link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>

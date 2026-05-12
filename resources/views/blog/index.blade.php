@@ -170,7 +170,7 @@
                     <div class="flex flex-col gap-1">
                         <label class="text-white text-ui-label mb-1" for="email-sub">Professional Email Address</label>
                         <div class="flex flex-col md:flex-row gap-4">
-                            <input class="flex-grow bg-white border border-outline-variant px-6 py-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary text-primary-container text-ui-label" id="email-sub" placeholder="email@example.com" type="email" required/>
+                            <input class="flex-grow bg-white border border-outline-variant px-6 py-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary text-primary-container text-ui-label" id="email-sub" placeholder="email@example.com" type="email" name="email" required/>
                             <button class="bg-secondary text-white font-bold px-8 py-4 rounded-lg hover:bg-on-secondary-container transition-all shadow-lg text-ui-label" type="submit">Subscribe</button>
                         </div>
                     </div>

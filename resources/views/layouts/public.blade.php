@@ -7,6 +7,8 @@
 
 <title>@yield('title', 'Elkris Bio Health - Scientific Vitality')</title>
 <meta name="description" content="@yield('meta_description', 'Evidence-based wellness and bio-clinical insights for health-conscious professionals.')">
+<link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
 @stack('seo')
 
