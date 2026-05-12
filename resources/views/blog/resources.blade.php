@@ -27,42 +27,51 @@
     </div>
 </section>
 
-{{-- Downloads Section --}}
-<section id="downloads" class="max-w-[1280px] mx-auto px-5 py-section-gap">
-    <h2 class="font-headline-md text-[32px] font-semibold text-primary-container mb-8">Scientific Downloads</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        @foreach($resources as $resource)
-        <div class="@if($loop->first) md:col-span-2 @endif bg-white rounded-xl border border-surface-variant shadow-sm overflow-hidden flex flex-col @if($loop->first) md:flex-row @endif">
-            @if($resource['featured'])
-            <div class="md:w-2/5 bg-surface-container-high p-8 flex items-center justify-center">
-                <span class="material-symbols-outlined text-primary-container text-8xl">picture_as_pdf</span>
-            </div>
-            <div class="md:w-3/5 p-8 flex flex-col justify-between">
-            @else
-            <div class="p-8 flex flex-col h-full">
-            @endif
-                <div>
-                    @if($resource['featured'])
-                    <span class="bg-secondary-container text-on-secondary-container text-caption font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Featured</span>
+    {{-- Downloads Section --}}
+    <section id="downloads" class="max-w-[1280px] mx-auto px-5 py-section-gap">
+        <h2 class="font-headline-md text-[32px] font-semibold text-primary-container mb-8">Scientific Downloads</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            @forelse($posts->take(6) as $post)
+            <div class="@if($loop->first) md:col-span-2 @endif bg-white rounded-xl border border-surface-variant shadow-sm overflow-hidden flex flex-col @if($loop->first) md:flex-row @endif">
+                @if($loop->first)
+                <div class="md:w-2/5 bg-surface-container-high p-8 flex items-center justify-center">
+                    @if($post->featured_image)
+                    <img src="{{ Storage::url($post->featured_image) }}" alt="{{ $post->title }}" class="w-full h-full object-cover rounded-lg">
                     @else
-                    <span class="material-symbols-outlined text-secondary text-4xl mb-4">monitoring</span>
+                    <span class="material-symbols-outlined text-primary-container text-8xl">picture_as_pdf</span>
                     @endif
-                    <h3 class="font-headline-sm text-[24px] font-semibold text-primary mt-3 mb-2">{{ $resource['title'] }}</h3>
-                    <p class="text-on-surface-variant text-ui-label @if(!$resource['featured']) flex-1 @endif">{{ $resource['description'] }}</p>
                 </div>
-                <div class="flex items-center gap-4 mt-6 pt-6 border-t border-outline-variant @if(!$resource['featured']) mt-auto @endif">
-                    <span class="text-caption text-outline">PDF &bull; {{ $resource['page_count'] }} pages{{ $resource['file_size'] ? ' &bull; '.$resource['file_size'] : '' }}</span>
-                    <a href="{{ route('blog.resources.download', $resource['key']) }}" class="ml-auto @if($resource['featured']) bg-primary-container text-on-primary px-6 py-2 rounded-lg font-ui-label text-ui-label hover:bg-secondary transition-all text-sm @else text-secondary font-bold text-ui-label hover:underline @endif">Download</a>
+                <div class="md:w-3/5 p-8 flex flex-col justify-between">
+                @else
+                <div class="p-8 flex flex-col h-full">
+                @endif
+                    <div>
+                        @if($loop->first)
+                        <span class="bg-secondary-container text-on-secondary-container text-caption font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Featured</span>
+                        @else
+                        <span class="material-symbols-outlined text-secondary text-4xl mb-4">description</span>
+                        @endif
+                        <h3 class="font-headline-sm text-[24px] font-semibold text-primary mt-3 mb-2">{{ $post->title }}</h3>
+                        <p class="text-on-surface-variant text-ui-label @if(!$loop->first) flex-1 @endif">{{ $post->excerpt ?? \Illuminate\Support\Str::limit(strip_tags($post->body), 150) }}</p>
+                    </div>
+                    <div class="flex items-center gap-4 mt-6 pt-6 border-t border-outline-variant @if(!$loop->first) mt-auto @endif">
+                        <span class="text-caption text-outline">{{ $post->reading_time }} &bull; {{ $post->category?->name ?? 'General' }}</span>
+                        <a href="{{ route('blog.resources.download', $post->slug) }}" class="ml-auto @if($loop->first) bg-primary-container text-on-primary px-6 py-2 rounded-lg font-ui-label text-ui-label hover:bg-secondary transition-all text-sm @else text-secondary font-bold text-ui-label hover:underline @endif">Download</a>
+                    </div>
+                @if($loop->first)
                 </div>
-            @if($resource['featured'])
+                @else
+                </div>
+                @endif
             </div>
-            @else
+            @empty
+            <div class="md:col-span-3 text-center py-16">
+                <span class="material-symbols-outlined text-6xl text-outline-variant mb-4">picture_as_pdf</span>
+                <p class="text-on-surface-variant text-ui-label">No downloadable resources available yet. Check back soon!</p>
             </div>
-            @endif
+            @endforelse
         </div>
-        @endforeach
-    </div>
-</section>
+    </section>
 
 {{-- Categories --}}
 <section class="max-w-[1280px] mx-auto px-5 pb-section-gap">

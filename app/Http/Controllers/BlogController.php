@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
-use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
@@ -77,43 +78,36 @@ class BlogController extends Controller
     public function resources()
     {
         $categories = Category::active()->get();
+        $posts = Post::published()->with(['author', 'category', 'tags'])->recent()->get();
 
-        $resources = [
-            [
-                'key' => 'nutrition-manual',
-                'title' => 'The Nutrition & Healthy Living Manual',
-                'description' => 'A comprehensive guide covering evidence-based nutrition, meal planning, and lifestyle modifications for optimal health.',
-                'page_count' => 24,
-                'file_size' => '2.4 MB',
-                'featured' => true,
-            ],
-            [
-                'key' => 'glycemic-index-chart',
-                'title' => 'Glycemic Index Reference Chart',
-                'description' => 'Quick-reference chart of common Nigerian foods and their glycemic impact.',
-                'page_count' => 2,
-                'file_size' => null,
-                'featured' => false,
-            ],
-        ];
-
-        return view('blog.resources', compact('categories', 'resources'));
+        return view('blog.resources', compact('categories', 'posts'));
     }
 
-    public function downloadResource(string $resource)
+    public function downloadResource(string $slug)
     {
-        $path = "resources/{$resource}.pdf";
+        $post = Post::published()->where('slug', $slug)->firstOrFail();
 
-        if (! Storage::disk('public')->exists($path)) {
+        $filename = Str::slug($post->title).'.pdf';
+
+        $pdf = Pdf::loadView('pdf.post', [
+            'post' => $post,
+        ]);
+
+        return $pdf->download($filename);
+    }
+
+    public function downloadPost(Post $post)
+    {
+        if (! $post->is_published || ! $post->published_at || $post->published_at->isFuture()) {
             abort(404);
         }
 
-        $displayName = match ($resource) {
-            'nutrition-manual' => 'Nutrition_and_Healthy_Living_Manual.pdf',
-            'glycemic-index-chart' => 'Glycemic_Index_Reference_Chart.pdf',
-            default => "{$resource}.pdf",
-        };
+        $filename = Str::slug($post->title).'.pdf';
 
-        return Storage::disk('public')->download($path, $displayName);
+        $pdf = Pdf::loadView('pdf.post', [
+            'post' => $post,
+        ]);
+
+        return $pdf->download($filename);
     }
 }
