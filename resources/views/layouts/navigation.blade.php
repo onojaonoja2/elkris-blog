@@ -23,6 +23,11 @@
                         {{ __('Users') }}
                     </x-nav-link>
                     @endif
+                    @if(Auth::user()->canViewNewsletter())
+                    <x-nav-link :href="route('admin.newsletter-subscribers.index')" :active="request()->routeIs('admin.newsletter-subscribers.*')">
+                        {{ __('Subscribers') }}
+                    </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -84,6 +89,11 @@
             @if(Auth::user()->isAdmin())
             <x-responsive-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
                 {{ __('Users') }}
+            </x-responsive-nav-link>
+            @endif
+            @if(Auth::user()->canViewNewsletter())
+            <x-responsive-nav-link :href="route('admin.newsletter-subscribers.index')" :active="request()->routeIs('admin.newsletter-subscribers.*')">
+                {{ __('Subscribers') }}
             </x-responsive-nav-link>
             @endif
         </div>

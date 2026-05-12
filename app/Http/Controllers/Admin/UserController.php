@@ -58,6 +58,7 @@ class UserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($user)],
             'is_admin' => 'boolean',
             'is_restricted' => 'boolean',
+            'can_view_newsletter' => 'boolean',
         ]);
 
         if ($request->filled('password')) {

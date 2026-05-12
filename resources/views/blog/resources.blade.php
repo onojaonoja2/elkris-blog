@@ -36,7 +36,7 @@
                 @if($loop->first)
                 <div class="md:w-2/5 bg-surface-container-high p-8 flex items-center justify-center">
                     @if($post->featured_image)
-                    <img src="{{ Storage::url($post->featured_image) }}" alt="{{ $post->title }}" class="w-full h-full object-cover rounded-lg">
+                    <img src="{{ Storage::url($post->featured_image) }}" alt="{{ $post->title }}" class="w-full h-full object-cover rounded-lg" style="max-height: 200px;">
                     @else
                     <span class="material-symbols-outlined text-primary-container text-8xl">picture_as_pdf</span>
                     @endif

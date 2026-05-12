@@ -42,6 +42,11 @@
                 <input type="checkbox" name="is_restricted" id="is_restricted" value="1" class="w-5 h-5 rounded border-outline-variant text-error focus:ring-error" @checked(old('is_restricted', $user->is_restricted))>
                 <label for="is_restricted" class="font-ui-label text-on-surface">Restricted <span class="text-outline font-normal">(user cannot create posts)</span></label>
             </div>
+
+            <div class="flex items-center gap-3">
+                <input type="checkbox" name="can_view_newsletter" id="can_view_newsletter" value="1" class="w-5 h-5 rounded border-outline-variant text-secondary focus:ring-secondary" @checked(old('can_view_newsletter', $user->can_view_newsletter))>
+                <label for="can_view_newsletter" class="font-ui-label text-on-surface">Can view newsletter subscribers</label>
+            </div>
         </div>
 
         <div class="flex items-center gap-3 pt-2">

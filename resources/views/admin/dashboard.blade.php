@@ -47,6 +47,16 @@
         <p class="text-caption text-outline">Manage Users</p>
     </a>
     @endif
+    @if(auth()->user()->canViewNewsletter())
+    <a href="{{ route('admin.newsletter-subscribers.index') }}" class="bg-white rounded-xl border border-surface-variant p-6 shadow-sm hover:border-secondary transition-colors no-underline">
+        <div class="flex items-center justify-between mb-2">
+            <span class="material-symbols-outlined text-secondary text-3xl">mail</span>
+            <span class="text-caption text-outline">Subscribers</span>
+        </div>
+        <p class="font-headline-sm text-[24px] font-semibold text-primary">{{ $totalSubscribers }}</p>
+        <p class="text-caption text-outline">Newsletter Subscribers</p>
+    </a>
+    @endif
 </div>
 
 <div class="bg-white rounded-xl border border-surface-variant shadow-sm">

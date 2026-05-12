@@ -123,7 +123,7 @@
 
     @if($post->featured_image)
     <div class="featured-image">
-        <img src="{{ Storage::disk('public')->path($post->featured_image) }}" alt="{{ $post->featured_image_caption ?? $post->title }}">
+        <img src="{{ Storage::url($post->featured_image) }}" alt="{{ $post->featured_image_caption ?? $post->title }}">
         @if($post->featured_image_caption)
         <div class="caption">{{ $post->featured_image_caption }}</div>
         @endif

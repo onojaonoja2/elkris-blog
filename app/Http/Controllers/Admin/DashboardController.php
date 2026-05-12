@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\NewsletterSubscription;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
@@ -30,6 +31,7 @@ class DashboardController extends Controller
 
         $totalCategories = Category::count();
         $totalTags = Tag::count();
+        $totalSubscribers = NewsletterSubscription::count();
 
         return view('admin.dashboard', compact(
             'totalPosts',
@@ -39,6 +41,7 @@ class DashboardController extends Controller
             'totalTags',
             'recentPosts',
             'totalUsers',
+            'totalSubscribers',
         ));
     }
 }

@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password', 'is_admin', 'is_restricted'])]
+#[Fillable(['name', 'email', 'password', 'is_admin', 'is_restricted', 'can_view_newsletter'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -25,6 +25,7 @@ class User extends Authenticatable
             'password' => 'hashed',
             'is_admin' => 'boolean',
             'is_restricted' => 'boolean',
+            'can_view_newsletter' => 'boolean',
         ];
     }
 
@@ -36,6 +37,11 @@ class User extends Authenticatable
     public function isRestricted(): bool
     {
         return $this->is_restricted;
+    }
+
+    public function canViewNewsletter(): bool
+    {
+        return $this->is_admin || $this->can_view_newsletter;
     }
 
     public function posts(): HasMany
