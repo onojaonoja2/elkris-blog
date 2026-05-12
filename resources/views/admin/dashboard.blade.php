@@ -57,6 +57,16 @@
         <p class="text-caption text-outline">Newsletter Subscribers</p>
     </a>
     @endif
+    @if(auth()->user()->canViewContacts())
+    <a href="{{ route('admin.contact-messages.index') }}" class="bg-white rounded-xl border border-surface-variant p-6 shadow-sm hover:border-secondary transition-colors no-underline">
+        <div class="flex items-center justify-between mb-2">
+            <span class="material-symbols-outlined text-secondary text-3xl">forum</span>
+            <span class="text-caption text-outline">Messages</span>
+        </div>
+        <p class="font-headline-sm text-[24px] font-semibold text-primary">{{ $totalContactMessages }}</p>
+        <p class="text-caption text-outline">Contact Messages</p>
+    </a>
+    @endif
 </div>
 
 <div class="bg-white rounded-xl border border-surface-variant shadow-sm">

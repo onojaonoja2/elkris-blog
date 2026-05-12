@@ -59,6 +59,7 @@ class UserController extends Controller
             'is_admin' => 'boolean',
             'is_restricted' => 'boolean',
             'can_view_newsletter' => 'boolean',
+            'can_view_contacts' => 'boolean',
         ]);
 
         if ($request->filled('password')) {

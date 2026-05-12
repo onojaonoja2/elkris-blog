@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\CanViewContacts;
 use App\Http\Middleware\CanViewNewsletter;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -16,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => AdminMiddleware::class,
             'newsletter' => CanViewNewsletter::class,
+            'contacts' => CanViewContacts::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

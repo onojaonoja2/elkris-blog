@@ -5,7 +5,7 @@
 <a href="{{ route('home') }}" class="text-ui-label text-on-surface-variant hover:text-secondary underline decoration-secondary/30 transition-all">Home</a>
 <a href="#" class="text-ui-label text-on-surface-variant hover:text-secondary underline decoration-secondary/30 transition-all">Privacy Policy</a>
 <a href="#" class="text-ui-label text-on-surface-variant hover:text-secondary underline decoration-secondary/30 transition-all">Terms of Service</a>
-<a href="#" class="text-ui-label text-on-surface-variant hover:text-secondary underline decoration-secondary/30 transition-all">Contact Us</a>
+<a href="{{ route('contact') }}" class="text-ui-label text-on-surface-variant hover:text-secondary underline decoration-secondary/30 transition-all">Contact Us</a>
 </nav>
 <div class="text-caption text-on-surface-variant opacity-80">
 &copy; {{ date('Y') }} Elkris Bio Health Nigeria Limited. Scientific Vitality.

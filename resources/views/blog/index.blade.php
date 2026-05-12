@@ -165,6 +165,12 @@
                 <p class="font-article text-primary-fixed-dim opacity-90 max-w-md">Join health professionals receiving weekly evidence-based wellness briefings delivered directly to your inbox.</p>
             </div>
             <div class="relative z-10 md:w-1/2 w-full">
+                @if(session('success'))
+                <div class="bg-primary-fixed/20 text-primary-fixed text-caption px-4 py-3 rounded-lg mb-4 border border-primary-fixed/30">✓ {{ session('success') }}</div>
+                @endif
+                @if($errors->has('email'))
+                <div class="bg-error/10 text-error text-caption px-4 py-3 rounded-lg mb-4 border border-error/30">{{ $errors->first('email') }}</div>
+                @endif
                 <form class="flex flex-col gap-4" method="POST" action="{{ route('newsletter.store') }}">
                     @csrf
                     <div class="flex flex-col gap-1">

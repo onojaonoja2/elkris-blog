@@ -9,6 +9,7 @@
 <a href="{{ route('home') }}" class="font-ui-label text-ui-label font-medium text-on-surface-variant hover:text-secondary transition-colors duration-200 @if(request()->routeIs('home')) text-secondary font-bold @endif">Blog Home</a>
 <a href="{{ route('blog.category', 'nutrition') }}" class="font-ui-label text-ui-label font-medium text-on-surface-variant hover:text-secondary transition-colors duration-200">Categories</a>
 <a href="{{ route('blog.resources') }}" class="font-ui-label text-ui-label font-medium text-on-surface-variant hover:text-secondary transition-colors duration-200">Resources</a>
+<a href="{{ route('contact') }}" class="font-ui-label text-ui-label font-medium text-on-surface-variant hover:text-secondary transition-colors duration-200 @if(request()->routeIs('contact')) text-secondary font-bold @endif">Contact</a>
 </nav>
 <div class="flex items-center gap-3">
 @auth

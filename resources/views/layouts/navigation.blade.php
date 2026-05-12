@@ -28,6 +28,11 @@
                         {{ __('Subscribers') }}
                     </x-nav-link>
                     @endif
+                    @if(Auth::user()->canViewContacts())
+                    <x-nav-link :href="route('admin.contact-messages.index')" :active="request()->routeIs('admin.contact-messages.*')">
+                        {{ __('Messages') }}
+                    </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -94,6 +99,11 @@
             @if(Auth::user()->canViewNewsletter())
             <x-responsive-nav-link :href="route('admin.newsletter-subscribers.index')" :active="request()->routeIs('admin.newsletter-subscribers.*')">
                 {{ __('Subscribers') }}
+            </x-responsive-nav-link>
+            @endif
+            @if(Auth::user()->canViewContacts())
+            <x-responsive-nav-link :href="route('admin.contact-messages.index')" :active="request()->routeIs('admin.contact-messages.*')">
+                {{ __('Messages') }}
             </x-responsive-nav-link>
             @endif
         </div>

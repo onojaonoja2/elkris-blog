@@ -107,8 +107,15 @@
                     <h4 class="font-ui-label font-bold text-primary-fixed">Newsletter</h4>
                 </div>
                 <p class="text-caption text-primary-fixed-dim mb-4">Get the latest insights delivered to your inbox.</p>
-                <form class="flex flex-col gap-3">
-                    <input class="px-4 py-3 rounded-lg border border-outline-variant bg-white text-ui-label text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary" placeholder="Your email" type="email" required/>
+                @if(session('success'))
+                <div class="bg-primary-fixed/20 text-primary-fixed text-caption px-4 py-3 rounded-lg mb-4 border border-primary-fixed/30">✓ {{ session('success') }}</div>
+                @endif
+                @if($errors->has('email'))
+                <div class="bg-error/10 text-error text-caption px-4 py-3 rounded-lg mb-4 border border-error/30">{{ $errors->first('email') }}</div>
+                @endif
+                <form class="flex flex-col gap-3" method="POST" action="{{ route('newsletter.store') }}">
+                    @csrf
+                    <input class="px-4 py-3 rounded-lg border border-outline-variant bg-white text-ui-label text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary" placeholder="Your email" type="email" name="email" required/>
                     <button class="bg-secondary text-white font-bold px-5 py-3 rounded-lg hover:bg-on-secondary-container transition-all text-ui-label" type="submit">Subscribe</button>
                 </form>
             </div>

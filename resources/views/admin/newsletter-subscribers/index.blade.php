@@ -4,6 +4,13 @@
 @section('header', 'Newsletter Subscribers')
 
 @section('content')
+<div class="mb-6 flex justify-end">
+    <a href="{{ route('admin.newsletter-subscribers.export') }}" class="bg-secondary text-white font-bold px-5 py-2 rounded-lg hover:bg-on-secondary-container transition-all text-ui-label inline-flex items-center gap-2">
+        <span class="material-symbols-outlined text-[18px]">download</span>
+        Export CSV
+    </a>
+</div>
+
 <div class="bg-white rounded-xl border border-surface-variant shadow-sm overflow-hidden">
     <div class="overflow-x-auto">
         <table class="w-full">

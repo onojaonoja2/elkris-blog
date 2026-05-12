@@ -18,7 +18,11 @@ class NewsletterController extends Controller
             'subscribed_at' => now(),
         ]);
 
-        return redirect()->route('home')
+        if ($request->wantsJson()) {
+            return response()->json(['success' => true, 'message' => 'You have been subscribed to our newsletter successfully.']);
+        }
+
+        return redirect()->back()
             ->with('success', 'You have been subscribed to our newsletter successfully.');
     }
 }

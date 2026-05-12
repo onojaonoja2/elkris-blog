@@ -78,7 +78,7 @@ class PostController extends Controller
             $post->tags()->sync($request->tags);
         }
 
-        return redirect()->route('admin.posts.edit', $post)
+        return redirect()->route('admin.posts.index')
             ->with('success', 'Post created successfully.');
     }
 
@@ -143,7 +143,7 @@ class PostController extends Controller
             $post->tags()->sync($request->tags);
         }
 
-        return redirect()->route('admin.posts.edit', $post)
+        return redirect()->route('admin.posts.index')
             ->with('success', 'Post updated successfully.');
     }
 
