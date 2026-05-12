@@ -12,6 +12,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::withCount('posts')->latest()->paginate(20);
+
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -33,7 +34,7 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $validated = $request->validate([
-            'name' => 'required|max:255|unique:categories,name,' . $category->id,
+            'name' => 'required|max:255|unique:categories,name,'.$category->id,
             'description' => 'nullable',
             'is_active' => 'boolean',
         ]);

@@ -6,10 +6,12 @@
 @section('content')
 <div class="mb-6 flex justify-between items-center">
     <p class="text-on-surface-variant text-ui-label">{{ $posts->total() }} total posts</p>
+    @can('create', App\Models\Post::class)
     <a href="{{ route('admin.posts.create') }}" class="bg-primary-container text-on-primary px-6 py-2 rounded-lg font-ui-label text-ui-label font-bold hover:bg-secondary transition-all flex items-center gap-2">
         <span class="material-symbols-outlined text-[18px]">add</span>
         New Post
     </a>
+    @endcan
 </div>
 
 <div class="bg-white rounded-xl border border-surface-variant shadow-sm overflow-hidden">
@@ -18,7 +20,9 @@
             <tr class="border-b border-surface-variant bg-surface-container-low">
                 <th class="text-left px-6 py-4 text-ui-label font-bold text-primary">Title</th>
                 <th class="text-left px-6 py-4 text-ui-label font-bold text-primary hidden md:table-cell">Category</th>
+                @if(Auth::user()->isAdmin())
                 <th class="text-left px-6 py-4 text-ui-label font-bold text-primary hidden md:table-cell">Author</th>
+                @endif
                 <th class="text-left px-6 py-4 text-ui-label font-bold text-primary">Status</th>
                 <th class="text-left px-6 py-4 text-ui-label font-bold text-primary hidden lg:table-cell">Date</th>
                 <th class="text-right px-6 py-4 text-ui-label font-bold text-primary">Actions</th>
@@ -31,7 +35,9 @@
                     <a href="{{ route('admin.posts.edit', $post) }}" class="font-ui-label font-medium text-primary hover:text-secondary transition-colors">{{ $post->title }}</a>
                 </td>
                 <td class="px-6 py-4 text-ui-label text-on-surface-variant hidden md:table-cell">{{ $post->category?->name ?? '-' }}</td>
+                @if(Auth::user()->isAdmin())
                 <td class="px-6 py-4 text-ui-label text-on-surface-variant hidden md:table-cell">{{ $post->author?->name }}</td>
+                @endif
                 <td class="px-6 py-4">
                     @if($post->is_published)
                     <span class="inline-flex items-center px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed text-caption font-medium">Published</span>
@@ -60,7 +66,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="6" class="px-6 py-12 text-center">
+                <td colspan="{{ Auth::user()->isAdmin() ? 6 : 5 }}" class="px-6 py-12 text-center">
                     <span class="material-symbols-outlined text-5xl text-outline-variant mb-2 block">article</span>
                     <p class="text-on-surface-variant text-ui-label">No posts yet.</p>
                     <a href="{{ route('admin.posts.create') }}" class="text-secondary hover:underline text-ui-label mt-2 inline-block">Create your first post</a>

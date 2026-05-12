@@ -44,8 +44,13 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        Auth::login($user);
+        if (Auth::guest()) {
+            Auth::login($user);
 
-        return redirect(route('admin.dashboard', absolute: false));
+            return redirect(route('admin.dashboard', absolute: false));
+        }
+
+        return redirect(route('admin.users.index'))
+            ->with('success', 'User registered successfully.');
     }
 }

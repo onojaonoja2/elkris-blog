@@ -15,7 +15,7 @@
 <a href="{{ route('admin.dashboard') }}" class="bg-primary-container text-white px-6 py-2 rounded-lg font-ui-label text-ui-label hover:bg-secondary transition-all active:scale-95 shadow-sm">Dashboard</a>
 @else
 <a href="{{ route('login') }}" class="text-ui-label text-outline hover:text-secondary transition-colors duration-200 font-medium">Sign In</a>
-<a href="{{ route('register') }}" class="bg-primary-container text-white px-6 py-2 rounded-lg font-ui-label text-ui-label hover:bg-secondary transition-all active:scale-95 shadow-sm">Get Started</a>
+<a href="{{ route('login') }}" class="bg-primary-container text-white px-6 py-2 rounded-lg font-ui-label text-ui-label hover:bg-secondary transition-all active:scale-95 shadow-sm">Get Started</a>
 @endauth
 </div>
 </div>

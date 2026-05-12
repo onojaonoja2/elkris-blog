@@ -63,7 +63,8 @@ class Post extends Model
     {
         $words = str_word_count(strip_tags($this->body ?? ''));
         $minutes = max(1, ceil($words / 200));
-        return $minutes . ' min read';
+
+        return $minutes.' min read';
     }
 
     protected static function booted(): void

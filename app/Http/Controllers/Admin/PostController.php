@@ -15,15 +15,21 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::with(['author', 'category', 'tags'])
-            ->latest()
-            ->paginate(15);
+        $query = Post::with(['author', 'category', 'tags']);
+
+        if (! request()->user()->isAdmin()) {
+            $query->where('user_id', request()->user()->id);
+        }
+
+        $posts = $query->latest()->paginate(15);
 
         return view('admin.posts.index', compact('posts'));
     }
 
     public function create()
     {
+        $this->authorize('create', Post::class);
+
         $categories = Category::active()->orderBy('name')->get();
         $tags = Tag::orderBy('name')->get();
 
@@ -32,6 +38,8 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('create', Post::class);
+
         $request->merge(['is_published' => $request->boolean('is_published')]);
 
         $validated = $request->validate([
@@ -42,7 +50,7 @@ class PostController extends Controller
             'category_id' => 'nullable|exists:categories,id',
             'tags' => 'nullable|array',
             'tags.*' => 'exists:tags,id',
-            'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:' . min(5120, UploadedFile::getMaxFilesize() / 1024),
+            'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:'.min(5120, UploadedFile::getMaxFilesize() / 1024),
             'featured_image_caption' => 'nullable|max:255',
             'is_published' => 'boolean',
             'seo_title' => 'nullable|max:255',
@@ -76,6 +84,8 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
+        $this->authorize('update', $post);
+
         $categories = Category::active()->orderBy('name')->get();
         $tags = Tag::orderBy('name')->get();
 
@@ -84,17 +94,19 @@ class PostController extends Controller
 
     public function update(Request $request, Post $post)
     {
+        $this->authorize('update', $post);
+
         $request->merge(['is_published' => $request->boolean('is_published')]);
 
         $validated = $request->validate([
             'title' => 'required|max:255',
-            'slug' => 'nullable|max:255|unique:posts,slug,' . $post->id,
+            'slug' => 'nullable|max:255|unique:posts,slug,'.$post->id,
             'excerpt' => 'nullable',
             'body' => 'nullable',
             'category_id' => 'nullable|exists:categories,id',
             'tags' => 'nullable|array',
             'tags.*' => 'exists:tags,id',
-            'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:' . min(5120, UploadedFile::getMaxFilesize() / 1024),
+            'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:'.min(5120, UploadedFile::getMaxFilesize() / 1024),
             'featured_image_caption' => 'nullable|max:255',
             'is_published' => 'boolean',
             'remove_image' => 'boolean',
@@ -119,9 +131,9 @@ class PostController extends Controller
             $validated['slug'] = Str::slug($validated['title']);
         }
 
-        if ($request->boolean('is_published') && !$post->is_published) {
+        if ($request->boolean('is_published') && ! $post->is_published) {
             $validated['published_at'] = now();
-        } elseif (!$request->boolean('is_published')) {
+        } elseif (! $request->boolean('is_published')) {
             $post->published_at = null;
         }
 
@@ -137,6 +149,8 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
+        $this->authorize('delete', $post);
+
         if ($post->featured_image) {
             Storage::disk('public')->delete($post->featured_image);
         }

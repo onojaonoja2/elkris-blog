@@ -25,7 +25,7 @@ class BlogController extends Controller
 
     public function show(Post $post)
     {
-        if (!$post->is_published || !$post->published_at || $post->published_at->isFuture()) {
+        if (! $post->is_published || ! $post->published_at || $post->published_at->isFuture()) {
             abort(404);
         }
 
@@ -76,6 +76,7 @@ class BlogController extends Controller
     public function resources()
     {
         $categories = Category::active()->get();
+
         return view('blog.resources', compact('categories'));
     }
 }

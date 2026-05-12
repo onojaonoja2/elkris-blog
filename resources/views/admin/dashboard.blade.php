@@ -37,6 +37,16 @@
         <p class="font-headline-sm text-[24px] font-semibold text-primary">{{ $totalCategories }}</p>
         <p class="text-caption text-outline">Categories</p>
     </div>
+    @if(!is_null($totalUsers))
+    <a href="{{ route('admin.users.index') }}" class="bg-white rounded-xl border border-surface-variant p-6 shadow-sm hover:border-secondary transition-colors no-underline">
+        <div class="flex items-center justify-between mb-2">
+            <span class="material-symbols-outlined text-secondary text-3xl">group</span>
+            <span class="text-caption text-outline">Users</span>
+        </div>
+        <p class="font-headline-sm text-[24px] font-semibold text-primary">{{ $totalUsers }}</p>
+        <p class="text-caption text-outline">Manage Users</p>
+    </a>
+    @endif
 </div>
 
 <div class="bg-white rounded-xl border border-surface-variant shadow-sm">
