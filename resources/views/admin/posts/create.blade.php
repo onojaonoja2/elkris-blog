@@ -90,6 +90,7 @@
                     <p class="text-caption text-outline">JPEG, PNG, WebP (max 5MB)</p>
                 </div>
                 <input type="file" name="featured_image" id="featured-image-input" class="hidden" accept="image/jpeg,image/png,image/webp,image/gif">
+                @error('featured_image') <p class="text-error text-caption mt-1">{{ $message }}</p> @enderror
                 <img id="featured-image-preview" class="hidden mt-3 rounded-lg w-full h-40 object-cover" src="" alt="Preview">
             </div>
 

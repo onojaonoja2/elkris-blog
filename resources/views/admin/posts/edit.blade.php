@@ -95,6 +95,7 @@
                     <p class="text-caption text-outline">Click to change image</p>
                 </div>
                 <input type="file" name="featured_image" id="featured-image-input" class="hidden" accept="image/jpeg,image/png,image/webp,image/gif">
+                @error('featured_image') <p class="text-error text-caption mt-1">{{ $message }}</p> @enderror
                 <img id="featured-image-preview" class="hidden mt-3 rounded-lg w-full h-40 object-cover" src="" alt="Preview">
                 <input type="text" name="featured_image_caption" value="{{ old('featured_image_caption', $post->featured_image_caption) }}" class="w-full border border-outline-variant rounded-lg px-4 py-3 text-ui-label text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary bg-surface-container-lowest mt-3" placeholder="Optional caption...">
             </div>
@@ -113,13 +114,13 @@
                     <textarea name="seo_description" rows="2" class="w-full border border-outline-variant rounded-lg px-4 py-3 text-ui-label text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary bg-surface-container-lowest" placeholder="SEO Description (max 320 chars)">{{ old('seo_description', $post->seo_description) }}</textarea>
                 </div>
             </div>
-
-            <form method="POST" action="{{ route('admin.posts.destroy', $post) }}" onsubmit="return confirm('Are you sure you want to delete this post?')">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="w-full border border-error text-error font-bold px-6 py-3 rounded-lg hover:bg-error-container transition-all text-ui-label">Delete Post</button>
-            </form>
         </div>
     </div>
+</form>
+
+<form method="POST" action="{{ route('admin.posts.destroy', $post) }}" onsubmit="return confirm('Are you sure you want to delete this post?')" class="max-w-[1400px] mx-auto px-5 mt-6">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="w-full border border-error text-error font-bold px-6 py-3 rounded-lg hover:bg-error-container transition-all text-ui-label">Delete Post</button>
 </form>
 @endsection

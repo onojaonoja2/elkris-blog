@@ -36,7 +36,7 @@ const initializeEditor = () => {
         onUpdate: ({ editor }) => {
             const hiddenInput = document.getElementById('body-content');
             if (hiddenInput) {
-                hiddenInput.setAttribute('value', editor.getHTML());
+                hiddenInput.value = editor.getHTML();
             }
         },
     });
@@ -143,7 +143,7 @@ const initAutoSave = () => {
     const saveDraft = () => {
         const draft = {
             title: titleInput.value,
-            content: contentInput.getAttribute('value') || '',
+            content: contentInput.value || '',
             savedAt: new Date().toISOString(),
         };
         try {

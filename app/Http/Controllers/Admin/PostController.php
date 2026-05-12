@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -31,15 +32,17 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+        $request->merge(['is_published' => $request->boolean('is_published')]);
+
         $validated = $request->validate([
             'title' => 'required|max:255',
-            'slug' => 'required|max:255|unique:posts,slug',
+            'slug' => 'nullable|max:255|unique:posts,slug',
             'excerpt' => 'nullable',
             'body' => 'nullable',
             'category_id' => 'nullable|exists:categories,id',
             'tags' => 'nullable|array',
             'tags.*' => 'exists:tags,id',
-            'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:' . min(5120, UploadedFile::getMaxFilesize() / 1024),
             'featured_image_caption' => 'nullable|max:255',
             'is_published' => 'boolean',
             'seo_title' => 'nullable|max:255',
@@ -55,6 +58,10 @@ class PostController extends Controller
 
         if ($request->boolean('is_published')) {
             $validated['published_at'] = now();
+        }
+
+        if (empty($validated['slug'])) {
+            $validated['slug'] = Str::slug($validated['title']);
         }
 
         $post = Post::create($validated);
@@ -77,15 +84,17 @@ class PostController extends Controller
 
     public function update(Request $request, Post $post)
     {
+        $request->merge(['is_published' => $request->boolean('is_published')]);
+
         $validated = $request->validate([
             'title' => 'required|max:255',
-            'slug' => 'required|max:255|unique:posts,slug,' . $post->id,
+            'slug' => 'nullable|max:255|unique:posts,slug,' . $post->id,
             'excerpt' => 'nullable',
             'body' => 'nullable',
             'category_id' => 'nullable|exists:categories,id',
             'tags' => 'nullable|array',
             'tags.*' => 'exists:tags,id',
-            'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:' . min(5120, UploadedFile::getMaxFilesize() / 1024),
             'featured_image_caption' => 'nullable|max:255',
             'is_published' => 'boolean',
             'remove_image' => 'boolean',
@@ -104,6 +113,10 @@ class PostController extends Controller
         if ($request->boolean('remove_image') && $post->featured_image) {
             Storage::disk('public')->delete($post->featured_image);
             $validated['featured_image'] = null;
+        }
+
+        if (empty($validated['slug'])) {
+            $validated['slug'] = Str::slug($validated['title']);
         }
 
         if ($request->boolean('is_published') && !$post->is_published) {
