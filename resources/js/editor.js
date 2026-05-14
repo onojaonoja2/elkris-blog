@@ -8,6 +8,34 @@ const initializeEditor = () => {
     const editorElement = document.getElementById('tiptap-editor');
     if (!editorElement) return false;
 
+    // Inject list styles for ProseMirror editor
+    if (!document.getElementById('pm-list-styles')) {
+        const style = document.createElement('style');
+        style.id = 'pm-list-styles';
+        style.textContent = `
+            #tiptap-editor ul, #tiptap-editor ol,
+            .ProseMirror ul, .ProseMirror ol {
+                padding-left: 1.5rem !important;
+                margin-bottom: 1.5rem !important;
+                list-style-position: inside !important;
+            }
+            #tiptap-editor ul, .ProseMirror ul { list-style-type: disc !important; }
+            #tiptap-editor ol, .ProseMirror ol { list-style-type: decimal !important; }
+            #tiptap-editor li, .ProseMirror li {
+                display: list-item !important;
+                margin-bottom: 0.25rem !important;
+                list-style-position: inside !important;
+            }
+            #tiptap-editor li::before, .ProseMirror li::before {
+                display: none !important;
+                content: none !important;
+            }
+            #tiptap-editor ul ul, .ProseMirror ul ul { list-style-type: circle !important; }
+            #tiptap-editor ol ol, .ProseMirror ol ol { list-style-type: lower-alpha !important; }
+        `;
+        document.head.appendChild(style);
+    }
+
     const initialContent = editorElement.dataset.initialBody || '';
 
     const editor = new Editor({
@@ -16,6 +44,14 @@ const initializeEditor = () => {
         extensions: [
             StarterKit.configure({
                 heading: { levels: [2, 3] },
+                bulletList: {
+                    keepMarks: true,
+                    keepAttributes: false,
+                },
+                orderedList: {
+                    keepMarks: true,
+                    keepAttributes: false,
+                },
             }),
             Image.configure({
                 inline: false,
@@ -55,8 +91,14 @@ const initializeEditor = () => {
         'italic': () => editor.chain().focus().toggleItalic().run(),
         'heading-2': () => editor.chain().focus().toggleHeading({ level: 2 }).run(),
         'heading-3': () => editor.chain().focus().toggleHeading({ level: 3 }).run(),
-        'bullet-list': () => editor.chain().focus().toggleBulletList().run(),
-        'ordered-list': () => editor.chain().focus().toggleOrderedList().run(),
+        'bullet-list': () => {
+            editor.chain().focus().toggleBulletList().run();
+            console.log('[TipTap] toggleBulletList called. HTML:', editor.getHTML());
+        },
+        'ordered-list': () => {
+            editor.chain().focus().toggleOrderedList().run();
+            console.log('[TipTap] toggleOrderedList called. HTML:', editor.getHTML());
+        },
         'blockquote': () => editor.chain().focus().toggleBlockquote().run(),
         'code-block': () => editor.chain().focus().toggleCodeBlock().run(),
         'horizontal-rule': () => editor.chain().focus().setHorizontalRule().run(),
