@@ -79,7 +79,7 @@ class BlogController extends Controller
 
     public function resources()
     {
-        $categories = Category::active()->get();
+        $categories = Category::active()->withCount(['posts' => fn ($q) => $q->published()])->get();
         $posts = Post::published()->with(['author', 'category', 'tags'])->recent()->get();
 
         return view('blog.resources', compact('categories', 'posts'));
