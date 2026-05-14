@@ -13,9 +13,30 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
+
+        {{-- Avatar --}}
+        <div>
+            <x-input-label :value="__('Profile Picture')" />
+            <div class="mt-2 flex items-center gap-6">
+                <div class="shrink-0">
+                    @if($user->avatar)
+                    <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="w-20 h-20 rounded-full object-cover">
+                    @else
+                    <div class="w-20 h-20 rounded-full bg-secondary/20 text-secondary flex items-center justify-center text-2xl font-bold">
+                        {{ strtoupper(substr($user->name, 0, 1)) }}
+                    </div>
+                    @endif
+                </div>
+                <div class="flex flex-col gap-2">
+                    <input type="file" name="avatar" id="avatar" accept="image/jpeg,image/png,image/gif,image/webp" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-secondary/10 file:text-secondary hover:file:bg-secondary/20">
+                    <p class="text-xs text-gray-500">JPEG, PNG, GIF, WebP. Max 5MB.</p>
+                    <x-input-error class="mt-2" :messages="$errors->get('avatar')" />
+                </div>
+            </div>
+        </div>
 
         <div>
             <x-input-label for="name" :value="__('Name')" />

@@ -30,9 +30,13 @@
                 <tr class="hover:bg-surface-container-lowest transition-colors">
                     <td class="px-6 py-4">
                         <div class="flex items-center gap-3">
+                            @if($user->avatar)
+                            <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="w-8 h-8 rounded-full object-cover">
+                            @else
                             <div class="w-8 h-8 rounded-full bg-secondary/20 text-secondary flex items-center justify-center text-sm font-bold">
                                 {{ strtoupper(substr($user->name, 0, 1)) }}
                             </div>
+                            @endif
                             <span class="font-ui-label font-semibold">{{ $user->name }}</span>
                         </div>
                     </td>

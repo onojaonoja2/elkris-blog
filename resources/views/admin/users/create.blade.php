@@ -5,8 +5,26 @@
 
 @section('content')
 <div class="max-w-2xl">
-    <form method="POST" action="{{ route('admin.users.store') }}" class="bg-white rounded-xl border border-surface-variant shadow-sm p-6 space-y-6">
+    <form method="POST" action="{{ route('admin.users.store') }}" class="bg-white rounded-xl border border-surface-variant shadow-sm p-6 space-y-6" enctype="multipart/form-data">
         @csrf
+
+        {{-- Avatar --}}
+        <div>
+            <label class="font-ui-label font-bold text-primary mb-2 block">Profile Picture</label>
+            <div class="flex items-center gap-6">
+                <div class="shrink-0">
+                    <div class="w-20 h-20 rounded-full bg-secondary/20 text-secondary flex items-center justify-center text-2xl font-bold" id="avatar-preview-container">
+                        <span class="material-symbols-outlined text-3xl">person</span>
+                    </div>
+                    <img id="avatar-preview" class="hidden w-20 h-20 rounded-full object-cover" src="" alt="Preview">
+                </div>
+                <div class="flex flex-col gap-2">
+                    <input type="file" name="avatar" id="avatar" accept="image/jpeg,image/png,image/gif,image/webp" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-secondary/10 file:text-secondary hover:file:bg-secondary/20">
+                    <p class="text-xs text-outline">JPEG, PNG, GIF, WebP. Max 5MB.</p>
+                    @error('avatar') <p class="text-error text-caption mt-1">{{ $message }}</p> @enderror
+                </div>
+            </div>
+        </div>
 
         <div>
             <label class="font-ui-label font-bold text-primary mb-2 block">Name</label>
@@ -42,4 +60,23 @@
         </div>
     </form>
 </div>
+
+<script>
+document.getElementById('avatar')?.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+            const container = document.getElementById('avatar-preview-container');
+            const img = document.getElementById('avatar-preview');
+            if (container) container.classList.add('hidden');
+            if (img) {
+                img.src = ev.target.result;
+                img.classList.remove('hidden');
+            }
+        };
+        reader.readAsDataURL(file);
+    }
+});
+</script>
 @endsection

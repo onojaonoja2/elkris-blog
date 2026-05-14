@@ -6,12 +6,14 @@ namespace App\Models;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
-#[Fillable(['name', 'email', 'password', 'is_admin', 'is_restricted', 'can_view_newsletter', 'can_view_contacts'])]
+#[Fillable(['name', 'email', 'password', 'avatar', 'is_admin', 'is_restricted', 'can_view_newsletter', 'can_view_contacts'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -28,6 +30,13 @@ class User extends Authenticatable
             'can_view_newsletter' => 'boolean',
             'can_view_contacts' => 'boolean',
         ];
+    }
+
+    public function avatarUrl(): Attribute
+    {
+        return Attribute::get(fn () => $this->avatar
+            ? Storage::disk('public')->url($this->avatar)
+            : null);
     }
 
     public function isAdmin(): bool

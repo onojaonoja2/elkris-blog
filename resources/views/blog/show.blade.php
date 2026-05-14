@@ -52,10 +52,14 @@
     @endif
     <h1 class="font-display-lg-mobile md:font-display-lg text-[32px] md:text-[48px] leading-tight font-bold text-primary">{{ $post->title }}</h1>
     <div class="flex items-center gap-4 text-ui-label text-on-surface-variant">
-        <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold">
-                {{ strtoupper(substr($post->author?->name ?? 'E', 0, 1)) }}
-            </div>
+            <div class="flex items-center gap-3">
+                @if($post->author?->avatar)
+                <img src="{{ $post->author->avatar_url }}" alt="{{ $post->author->name }}" class="w-10 h-10 rounded-full object-cover">
+                @else
+                <div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold">
+                    {{ strtoupper(substr($post->author?->name ?? 'E', 0, 1)) }}
+                </div>
+                @endif
             <div class="flex flex-col">
                 <span class="font-semibold text-primary">{{ $post->author?->name ?? 'Elkris Bio Health' }}</span>
                 <span class="text-caption text-outline">{{ $post->published_at?->format('F j, Y') }} &bull; {{ $post->reading_time }}</span>
@@ -94,9 +98,13 @@
 </div>
 
 <div class="flex items-center gap-4 p-6 bg-surface-container-low rounded-xl">
+    @if($post->author?->avatar)
+    <img src="{{ $post->author->avatar_url }}" alt="{{ $post->author->name }}" class="w-14 h-14 rounded-full object-cover">
+    @else
     <div class="w-14 h-14 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold text-xl">
         {{ strtoupper(substr($post->author?->name ?? 'E', 0, 1)) }}
     </div>
+    @endif
     <div>
         <span class="font-ui-label font-bold text-primary">Written by {{ $post->author?->name ?? 'Elkris Bio Health' }}</span>
         <p class="text-caption text-outline mt-1">Published {{ $post->published_at?->diffForHumans() }}</p>
