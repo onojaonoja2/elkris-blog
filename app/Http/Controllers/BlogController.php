@@ -25,6 +25,20 @@ class BlogController extends Controller
         ));
     }
 
+    public function all()
+    {
+        $posts = Post::published()
+            ->with(['author', 'category', 'tags'])
+            ->recent()
+            ->paginate(10);
+
+        $categories = Category::active()->get();
+        $trendingTags = Tag::has('posts')->get();
+        $featuredQuote = Post::published()->inRandomOrder()->first();
+
+        return view('blog.all', compact('posts', 'categories', 'trendingTags', 'featuredQuote'));
+    }
+
     public function show(Post $post)
     {
         if (! $post->is_published || ! $post->published_at || $post->published_at->isFuture()) {

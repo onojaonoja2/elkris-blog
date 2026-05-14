@@ -1,11 +1,11 @@
 @extends('layouts.public')
 
-@section('title', $category->name . ' - Elkris Bio Health')
-@section('meta_description', $category->description ?? 'Explore articles in ' . $category->name)
+@section('title', 'All Topics - Elkris Bio Health')
+@section('meta_description', 'Browse all articles across every category on Elkris Bio Health')
 
 @push('seo')
-<meta property="og:title" content="{{ $category->name }} - Elkris Bio Health">
-<meta property="og:description" content="{{ $category->description ?? '' }}">
+<meta property="og:title" content="All Topics - Elkris Bio Health">
+<meta property="og:description" content="Browse all articles across every category on Elkris Bio Health">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{{ url()->current() }}">
 @endpush
@@ -14,10 +14,8 @@
 <main class="max-w-[1280px] mx-auto px-5 md:px-16 py-8">
     {{-- Search Section --}}
     <section class="mb-section-gap max-w-2xl mx-auto text-center">
-        <h1 class="font-display-lg text-[32px] md:text-[48px] leading-tight font-bold text-primary-container mb-6">{{ $category->name }}</h1>
-        @if($category->description)
-        <p class="text-on-surface-variant text-ui-label mb-6">{{ $category->description }}</p>
-        @endif
+        <h1 class="font-display-lg text-[32px] md:text-[48px] leading-tight font-bold text-primary-container mb-6">All Topics</h1>
+        <p class="text-on-surface-variant text-ui-label mb-6">Browse every article across all categories.</p>
         <div class="relative group">
             <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
                 <span class="material-symbols-outlined text-outline">search</span>
@@ -28,11 +26,11 @@
 
     {{-- Category Filters --}}
     <div class="flex overflow-x-auto gap-3 no-scrollbar mb-8 pb-2">
-        <a href="{{ route('blog.all') }}" class="inline-flex items-center px-5 py-2 rounded-full border text-ui-label font-medium transition-all whitespace-nowrap @if(!request()->routeIs('blog.category')) bg-primary-container text-on-primary border-primary-container @else border-outline-variant text-on-surface-variant hover:bg-surface-container-high @endif">
+        <a href="{{ route('blog.all') }}" class="inline-flex items-center px-5 py-2 rounded-full border text-ui-label font-medium transition-all whitespace-nowrap bg-primary-container text-on-primary border-primary-container">
             All Topics
         </a>
         @foreach($categories as $cat)
-        <a href="{{ route('blog.category', $cat) }}" class="inline-flex items-center px-5 py-2 rounded-full border text-ui-label font-medium transition-all whitespace-nowrap @if($cat->id === $category->id) bg-primary-container text-on-primary border-primary-container @else border-outline-variant text-on-surface-variant hover:bg-surface-container-high @endif">
+        <a href="{{ route('blog.category', $cat) }}" class="inline-flex items-center px-5 py-2 rounded-full border text-ui-label font-medium transition-all whitespace-nowrap border-outline-variant text-on-surface-variant hover:bg-surface-container-high">
             {{ $cat->name }}
         </a>
         @endforeach
@@ -71,7 +69,7 @@
             <div class="text-center py-16">
                 <span class="material-symbols-outlined text-6xl text-outline-variant mb-4">article</span>
                 <h4 class="font-headline-sm text-[24px] font-semibold text-primary-container mb-2">No Articles Yet</h4>
-                <p class="text-on-surface-variant">Articles in this category are coming soon.</p>
+                <p class="text-on-surface-variant">Articles are coming soon. Check back later.</p>
             </div>
             @endforelse
 

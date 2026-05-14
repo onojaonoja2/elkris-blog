@@ -8,8 +8,8 @@
 </div>
 <nav class="hidden md:flex items-center gap-8">
 <a href="{{ route('home') }}" class="font-ui-label text-ui-label font-medium text-on-surface-variant hover:text-secondary transition-colors duration-200 @if(request()->routeIs('home')) text-secondary font-bold @endif">Blog Home</a>
-<a href="{{ route('blog.category', 'nutrition') }}" class="font-ui-label text-ui-label font-medium text-on-surface-variant hover:text-secondary transition-colors duration-200">Categories</a>
-<a href="{{ route('blog.resources') }}" class="font-ui-label text-ui-label font-medium text-on-surface-variant hover:text-secondary transition-colors duration-200">Resources</a>
+<a href="{{ route('blog.all') }}" class="font-ui-label text-ui-label font-medium text-on-surface-variant hover:text-secondary transition-colors duration-200 @if(request()->routeIs('blog.category') || request()->routeIs('blog.all')) text-secondary font-bold @endif">Categories</a>
+<a href="{{ route('blog.resources') }}" class="font-ui-label text-ui-label font-medium text-on-surface-variant hover:text-secondary transition-colors duration-200 @if(request()->routeIs('blog.resources')) text-secondary font-bold @endif">Resources</a>
 <a href="{{ route('contact') }}" class="font-ui-label text-ui-label font-medium text-on-surface-variant hover:text-secondary transition-colors duration-200 @if(request()->routeIs('contact')) text-secondary font-bold @endif">Contact</a>
 </nav>
 <div class="flex items-center gap-2 md:gap-3">
@@ -38,11 +38,11 @@
             <span class="material-symbols-outlined text-[18px]">home</span>
             Blog Home
         </a>
-        <a href="{{ route('blog.category', 'nutrition') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg font-ui-label text-ui-label font-medium text-on-surface-variant hover:bg-surface-container-high hover:text-secondary transition-colors" @click="mobileOpen = false">
+        <a href="{{ route('blog.all') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg font-ui-label text-ui-label font-medium text-on-surface-variant hover:bg-surface-container-high hover:text-secondary transition-colors @if(request()->routeIs('blog.category') || request()->routeIs('blog.all')) bg-surface-container-high text-secondary font-bold @endif" @click="mobileOpen = false">
             <span class="material-symbols-outlined text-[18px]">category</span>
             Categories
         </a>
-        <a href="{{ route('blog.resources') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg font-ui-label text-ui-label font-medium text-on-surface-variant hover:bg-surface-container-high hover:text-secondary transition-colors" @click="mobileOpen = false">
+        <a href="{{ route('blog.resources') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg font-ui-label text-ui-label font-medium text-on-surface-variant hover:bg-surface-container-high hover:text-secondary transition-colors @if(request()->routeIs('blog.resources')) bg-surface-container-high text-secondary font-bold @endif" @click="mobileOpen = false">
             <span class="material-symbols-outlined text-[18px]">menu_book</span>
             Resources
         </a>
