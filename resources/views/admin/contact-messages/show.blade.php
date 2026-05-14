@@ -6,7 +6,7 @@
 @section('content')
 <div class="max-w-3xl">
     <div class="bg-white rounded-xl border border-surface-variant shadow-sm p-8">
-        <div class="grid grid-cols-2 gap-6 mb-8 pb-8 border-b border-outline-variant">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8 pb-8 border-b border-outline-variant">
             <div>
                 <label class="font-ui-label font-bold text-caption text-outline uppercase tracking-wider">Name</label>
                 <p class="text-ui-label text-on-surface mt-1">{{ $contactMessage->name }}</p>

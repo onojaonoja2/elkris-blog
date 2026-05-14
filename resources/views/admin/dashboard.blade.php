@@ -75,14 +75,14 @@
     </div>
     <div class="divide-y divide-surface-variant">
         @forelse($recentPosts as $post)
-        <div class="px-6 py-4 flex items-center justify-between">
-            <div class="flex-1">
-                <a href="{{ route('admin.posts.edit', $post) }}" class="font-ui-label font-medium text-primary hover:text-secondary transition-colors">{{ $post->title }}</a>
-                <div class="flex items-center gap-3 mt-1">
+        <div class="px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <div class="flex-1 min-w-0">
+                <a href="{{ route('admin.posts.edit', $post) }}" class="font-ui-label font-medium text-primary hover:text-secondary transition-colors truncate block">{{ $post->title }}</a>
+                <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1">
                     <span class="text-caption text-outline">{{ $post->author?->name }}</span>
-                    <span class="text-caption text-outline">&bull;</span>
+                    <span class="text-caption text-outline hidden sm:inline">&bull;</span>
                     <span class="text-caption text-outline">{{ $post->category?->name ?? 'Uncategorized' }}</span>
-                    <span class="text-caption text-outline">&bull;</span>
+                    <span class="text-caption text-outline hidden sm:inline">&bull;</span>
                     @if($post->is_published)
                     <span class="text-caption text-primary-fixed-dim font-medium">Published</span>
                     @else
@@ -90,7 +90,7 @@
                     @endif
                 </div>
             </div>
-            <div class="text-caption text-outline">
+            <div class="text-caption text-outline shrink-0">
                 {{ $post->created_at->diffForHumans() }}
             </div>
         </div>

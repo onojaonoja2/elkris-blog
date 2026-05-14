@@ -10,14 +10,14 @@
 
     <div class="lg:col-span-2 space-y-6">
         <div class="bg-white rounded-xl border border-surface-variant shadow-sm p-6">
-            <input type="text" name="title" id="title" value="{{ old('title', $post->title) }}" placeholder="Post title..." class="w-full text-[32px] font-headline-md font-semibold text-primary border-none outline-none focus:outline-none placeholder:text-outline-variant bg-transparent" required/>
+            <input type="text" name="title" id="title" value="{{ old('title', $post->title) }}" placeholder="Post title..." class="w-full text-[24px] md:text-[32px] font-headline-md font-semibold text-primary border-none outline-none focus:outline-none placeholder:text-outline-variant bg-transparent" required/>
             @error('title') <p class="text-error text-caption mt-1">{{ $message }}</p> @enderror
             <input type="hidden" name="slug" id="slug" value="{{ old('slug', $post->slug) }}">
             @error('slug') <p class="text-error text-caption mt-1">{{ $message }}</p> @enderror
         </div>
 
         <div class="bg-white rounded-xl border border-surface-variant shadow-sm">
-            <div class="flex flex-wrap items-center gap-1 px-4 py-3 border-b border-surface-variant bg-surface-container-low sticky top-16 z-40">
+            <div class="flex items-center gap-1 px-4 py-3 border-b border-surface-variant bg-surface-container-low sticky top-16 z-40 overflow-x-auto">
                 <button type="button" id="editor-bold" class="p-2 rounded-lg text-outline hover:bg-surface-container-high transition-colors" title="Bold"><span class="material-symbols-outlined text-[18px]">format_bold</span></button>
                 <button type="button" id="editor-italic" class="p-2 rounded-lg text-outline hover:bg-surface-container-high transition-colors" title="Italic"><span class="material-symbols-outlined text-[18px]">format_italic</span></button>
                 <span class="w-px h-6 bg-outline-variant mx-1"></span>

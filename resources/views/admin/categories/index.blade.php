@@ -38,8 +38,8 @@
         <div class="divide-y divide-surface-variant">
             @forelse($categories as $cat)
             <div class="px-6 py-4 flex items-center justify-between">
-                <div>
-                    <span class="font-ui-label font-medium text-primary">{{ $cat->name }}</span>
+                <div class="min-w-0">
+                    <span class="font-ui-label font-medium text-primary truncate block">{{ $cat->name }}</span>
                     <div class="flex items-center gap-3 mt-1">
                         <span class="text-caption text-outline">{{ $cat->posts_count }} posts</span>
                         @if(!$cat->is_active)

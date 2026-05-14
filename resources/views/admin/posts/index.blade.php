@@ -15,6 +15,7 @@
 </div>
 
 <div class="bg-white rounded-xl border border-surface-variant shadow-sm overflow-hidden">
+    <div class="overflow-x-auto">
     <table class="w-full">
         <thead>
             <tr class="border-b border-surface-variant bg-surface-container-low">
@@ -81,6 +82,7 @@
             @endforelse
         </tbody>
     </table>
+    </div>
 </div>
 
 @if($posts->hasPages())

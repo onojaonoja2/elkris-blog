@@ -25,7 +25,7 @@
             <tbody class="divide-y divide-outline-variant">
                 @forelse($subscribers as $subscriber)
                 <tr class="hover:bg-surface-container-lowest transition-colors">
-                    <td class="px-6 py-4 text-ui-label text-on-surface">{{ $subscriber->email }}</td>
+                    <td class="px-6 py-4 text-ui-label text-on-surface max-w-[200px] truncate">{{ $subscriber->email }}</td>
                     <td class="px-6 py-4">
                         @if($subscriber->subscribed_at)
                         <span class="text-caption text-on-surface-variant">{{ $subscriber->subscribed_at->diffForHumans() }}</span>

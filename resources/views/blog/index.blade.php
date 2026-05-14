@@ -31,17 +31,17 @@
                     <span class="bg-primary-container text-on-primary text-caption font-bold px-4 py-1 rounded-full uppercase tracking-wider">Editor's Choice</span>
                 </div>
             </div>
-            <div class="w-full md:w-2/5 p-6 md:p-8 flex flex-col justify-center gap-4">
+            <div class="w-full md:w-2/5 p-6 md:p-8 flex flex-col justify-center gap-4 relative @if(!is_null($featuredPost) && !empty($featuredPost->featured_image)) bg-cover bg-center before:absolute before:inset-0 before:bg-gradient-to-r before:from-primary-container/95 before:to-primary-container/80 @endif" @if(!is_null($featuredPost) && !empty($featuredPost->featured_image)) style="background-image: url('{{ Storage::url($featuredPost->featured_image) }}')" @endif>
                 @if (!is_null($featuredPost))
-                <div class="flex items-center gap-2 text-secondary">
+                <div class="relative z-10 flex items-center gap-2 {{ !empty($featuredPost->featured_image) ? 'text-secondary-container' : 'text-secondary' }}">
                     <span class="material-symbols-outlined text-[18px]">clinical_notes</span>
                     <span class="text-ui-label font-bold">{{ $featuredPost->category?->name ?? 'Research Insight' }}</span>
                 </div>
-                <h2 class="font-display-lg-mobile md:font-display-lg text-[32px] md:text-[48px] leading-tight font-bold text-primary-container">{{ $featuredPost->title }}</h2>
-                <p class="text-article-body-mobile md:text-article-body text-on-surface-variant font-article">{{ $featuredPost->excerpt }}</p>
-                <div class="flex items-center gap-4 mt-2">
-                    <a href="{{ route('blog.show', $featuredPost) }}" class="bg-primary-container text-on-primary px-8 py-3 rounded-lg font-ui-label text-ui-label font-bold hover:bg-secondary transition-all shadow-md active:scale-95 inline-block">Read Article</a>
-                    <span class="text-caption text-outline font-medium">{{ $featuredPost->reading_time }}</span>
+                <h2 class="relative z-10 font-display-lg-mobile md:font-display-lg text-[32px] md:text-[48px] leading-tight font-bold {{ !empty($featuredPost->featured_image) ? 'text-primary-fixed' : 'text-primary-container' }}">{{ $featuredPost->title }}</h2>
+                <p class="relative z-10 text-article-body-mobile md:text-article-body font-article {{ !empty($featuredPost->featured_image) ? 'text-primary-fixed-dim' : 'text-on-surface-variant' }}">{{ $featuredPost->excerpt }}</p>
+                <div class="relative z-10 flex items-center gap-4 mt-2">
+                    <a href="{{ route('blog.show', $featuredPost) }}" class="bg-secondary text-on-secondary px-8 py-3 rounded-lg font-ui-label text-ui-label font-bold hover:bg-secondary-container transition-all shadow-md active:scale-95 inline-block">Read Article</a>
+                    <span class="text-caption {{ !empty($featuredPost->featured_image) ? 'text-primary-fixed-dim' : 'text-outline' }} font-medium">{{ $featuredPost->reading_time }}</span>
                 </div>
                 @else
                 <div class="flex items-center gap-2 text-secondary">
@@ -154,7 +154,7 @@
 
     {{-- Newsletter Section --}}
     <section class="mt-section-gap max-w-[1280px] mx-auto px-5">
-        <div class="bg-primary-container rounded-xl p-8 md:p-16 relative overflow-hidden flex flex-col md:flex-row items-center gap-12">
+        <div class="bg-primary-container rounded-xl p-6 md:p-16 relative overflow-hidden flex flex-col md:flex-row items-center gap-8 md:gap-12">
             <div class="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none">
                 <svg class="w-full h-full translate-x-1/4 scale-150" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                     <path d="M44.7,-76.4C58.1,-69.2,69.5,-57.4,78.2,-43.8C86.9,-30.2,93,-15.1,91.8,-0.7C90.5,13.7,82.1,27.3,72.4,39.6C62.8,51.8,52,62.6,39.1,70.9C26.1,79.2,13.1,85,0.1,84.9C-12.9,84.8,-25.8,78.8,-38,71.2C-50.2,63.6,-61.7,54.4,-70.7,42.6C-79.6,30.8,-86,15.4,-86.7,-0.4C-87.3,-16.2,-82.2,-32.4,-73.2,-46.1C-64.2,-59.8,-51.3,-71,-37.2,-77.7C-23.1,-84.4,-7.8,-86.6,7.8,-90.1C23.4,-93.6,44.7,-83.5,44.7,-76.4Z" fill="#ffffff" transform="translate(100 100)"></path>

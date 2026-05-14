@@ -7,7 +7,7 @@
 <a href="{{ route('blog.resources') }}" class="text-ui-label text-on-surface-variant hover:text-secondary underline decoration-secondary/30 transition-all">Resources</a>
 <a href="{{ route('contact') }}" class="text-ui-label text-on-surface-variant hover:text-secondary underline decoration-secondary/30 transition-all">Contact Us</a>
 </nav>
-<div class="text-caption text-on-surface-variant opacity-80">
+    <div class="text-caption text-on-surface-variant opacity-80 break-words max-w-full px-2">
 &copy; {{ date('Y') }} Elkris Bio Health Nigeria Limited. Scientific Vitality.
 </div>
 <div class="mt-4 flex gap-4 text-primary-container">
