@@ -3,8 +3,8 @@
 <div class="font-headline-sm text-[24px] font-bold text-primary-container mb-2">Elkris Bio Health</div>
 <nav class="flex flex-wrap justify-center gap-6 mb-4">
 <a href="{{ route('home') }}" class="text-ui-label text-on-surface-variant hover:text-secondary underline decoration-secondary/30 transition-all">Home</a>
-<a href="#" class="text-ui-label text-on-surface-variant hover:text-secondary underline decoration-secondary/30 transition-all">Privacy Policy</a>
-<a href="#" class="text-ui-label text-on-surface-variant hover:text-secondary underline decoration-secondary/30 transition-all">Terms of Service</a>
+<a href="{{ route('blog.category', 'nutrition') }}" class="text-ui-label text-on-surface-variant hover:text-secondary underline decoration-secondary/30 transition-all">Categories</a>
+<a href="{{ route('blog.resources') }}" class="text-ui-label text-on-surface-variant hover:text-secondary underline decoration-secondary/30 transition-all">Resources</a>
 <a href="{{ route('contact') }}" class="text-ui-label text-on-surface-variant hover:text-secondary underline decoration-secondary/30 transition-all">Contact Us</a>
 </nav>
 <div class="text-caption text-on-surface-variant opacity-80">

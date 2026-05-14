@@ -1,9 +1,10 @@
 <header class="bg-surface border-b border-surface-variant shadow-sm sticky top-0 z-50">
 <div class="flex items-center justify-between px-5 h-16 w-full max-w-[1280px] mx-auto">
 <div class="flex items-center gap-2">
-<a href="{{ route('home') }}" class="flex items-center gap-2 no-underline">
-<span class="font-headline-sm text-[24px] font-bold tracking-tight text-primary-container">Elkris Bio Health</span>
-</a>
+    <a href="{{ route('home') }}" class="flex items-center gap-2 no-underline">
+        <img src="{{ asset('dashboard-login.jpeg') }}" alt="Elkris Bio Health" class="w-8 h-8 md:w-10 md:h-10 object-contain rounded" />
+        <span class="font-headline-sm text-[24px] font-bold tracking-tight text-primary-container">Elkris Bio Health</span>
+    </a>
 </div>
 <nav class="hidden md:flex items-center gap-8">
 <a href="{{ route('home') }}" class="font-ui-label text-ui-label font-medium text-on-surface-variant hover:text-secondary transition-colors duration-200 @if(request()->routeIs('home')) text-secondary font-bold @endif">Blog Home</a>

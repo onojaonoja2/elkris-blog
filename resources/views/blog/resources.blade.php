@@ -98,7 +98,7 @@
                     <span class="material-symbols-outlined text-secondary text-3xl mb-3">support_agent</span>
                     <h4 class="font-ui-label font-bold text-on-secondary-container">Need Expert Help?</h4>
                     <p class="text-caption text-on-secondary-container/80 mb-4">Our health advisors are ready to assist you.</p>
-                    <a href="#" class="inline-block bg-secondary text-white font-bold px-6 py-3 rounded-lg hover:bg-on-secondary-container transition-all text-ui-label text-sm">Contact an Expert</a>
+                    <a href="{{ route('contact') }}" class="inline-block bg-secondary text-white font-bold px-6 py-3 rounded-lg hover:bg-on-secondary-container transition-all text-ui-label text-sm">Contact an Expert</a>
                 </div>
             </div>
             <div class="md:col-span-2 space-y-4">

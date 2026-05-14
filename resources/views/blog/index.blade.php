@@ -23,15 +23,15 @@
 @section('content')
 <div class="w-full">
     {{-- Hero Section --}}
-    <section class="max-w-[1280px] mx-auto px-5 pt-8 md:pt-12">
-        <div class="relative w-full rounded-xl overflow-hidden shadow-sm bg-surface-container-low flex flex-col md:flex-row min-h-[500px]">
+    <section class="max-w-[1280px] mx-auto px-5 pt-4 md:pt-6">
+        <div class="relative w-full rounded-xl overflow-hidden shadow-sm bg-surface-container-low flex flex-col md:flex-row min-h-[350px]">
             <div class="w-full md:w-3/5 h-64 md:h-auto relative">
                 <img alt="Elkris Bio Health" class="w-full h-full object-cover" src="{{ asset('elkris_foods_Image.jpeg') }}"/>
                 <div class="absolute top-4 left-4">
                     <span class="bg-primary-container text-on-primary text-caption font-bold px-4 py-1 rounded-full uppercase tracking-wider">Editor's Choice</span>
                 </div>
             </div>
-            <div class="w-full md:w-2/5 p-8 md:p-12 flex flex-col justify-center gap-6">
+            <div class="w-full md:w-2/5 p-6 md:p-8 flex flex-col justify-center gap-4">
                 @if (!is_null($featuredPost))
                 <div class="flex items-center gap-2 text-secondary">
                     <span class="material-symbols-outlined text-[18px]">clinical_notes</span>
