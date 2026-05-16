@@ -33,10 +33,16 @@ class BlogController extends Controller
             ->paginate(10);
 
         $categories = Category::active()->get();
-        $trendingTags = Tag::has('posts')->get();
+        $trendingTopics = Category::active()
+            ->whereHas('posts', fn ($q) => $q->published())
+            ->withSum(['posts' => fn ($q) => $q->published()], 'views_count')
+            ->orderByDesc('posts_sum_views_count')
+            ->take(5)
+            ->get();
+
         $featuredQuote = Post::published()->inRandomOrder()->first();
 
-        return view('blog.all', compact('posts', 'categories', 'trendingTags', 'featuredQuote'));
+        return view('blog.all', compact('posts', 'categories', 'trendingTopics', 'featuredQuote'));
     }
 
     public function show(Post $post)
@@ -71,10 +77,15 @@ class BlogController extends Controller
             ->paginate(10);
 
         $categories = Category::active()->get();
-        $trendingTags = Tag::has('posts')->get();
+        $trendingTopics = Category::active()
+            ->whereHas('posts', fn ($q) => $q->published())
+            ->withSum(['posts' => fn ($q) => $q->published()], 'views_count')
+            ->orderByDesc('posts_sum_views_count')
+            ->take(5)
+            ->get();
         $featuredQuote = Post::published()->inRandomOrder()->first();
 
-        return view('blog.category', compact('posts', 'category', 'categories', 'trendingTags', 'featuredQuote'));
+        return view('blog.category', compact('posts', 'category', 'categories', 'trendingTopics', 'featuredQuote'));
     }
 
     public function tag(Tag $tag)
@@ -86,9 +97,14 @@ class BlogController extends Controller
             ->paginate(10);
 
         $categories = Category::active()->get();
-        $trendingTags = Tag::has('posts')->get();
+        $trendingTopics = Category::active()
+            ->whereHas('posts', fn ($q) => $q->published())
+            ->withSum(['posts' => fn ($q) => $q->published()], 'views_count')
+            ->orderByDesc('posts_sum_views_count')
+            ->take(5)
+            ->get();
 
-        return view('blog.tag', compact('posts', 'tag', 'categories', 'trendingTags'));
+        return view('blog.tag', compact('posts', 'tag', 'categories', 'trendingTopics'));
     }
 
     public function resources()

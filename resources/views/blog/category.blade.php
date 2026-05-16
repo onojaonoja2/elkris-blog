@@ -92,10 +92,10 @@
                     Trending Topics
                 </h4>
                 <div class="flex flex-wrap gap-2">
-                    @forelse($trendingTags as $tag)
-                    <a href="{{ route('blog.tag', $tag) }}" class="inline-flex items-center px-3 py-1 rounded-full border border-outline-variant text-on-surface-variant text-caption hover:bg-surface-container-high hover:border-secondary transition-all no-underline">#{{ $tag->name }}</a>
+                    @forelse($trendingTopics as $topic)
+                    <a href="{{ route('blog.category', $topic) }}" class="inline-flex items-center px-3 py-1 rounded-full border border-outline-variant text-on-surface-variant text-caption hover:bg-surface-container-high hover:border-secondary transition-all no-underline">{{ $topic->name }}</a>
                     @empty
-                    <p class="text-caption text-outline">No tags yet.</p>
+                    <p class="text-caption text-outline">No trending topics yet.</p>
                     @endforelse
                 </div>
             </div>
