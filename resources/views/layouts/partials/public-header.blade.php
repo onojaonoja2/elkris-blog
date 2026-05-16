@@ -3,7 +3,6 @@
 <div class="flex items-center gap-2 min-w-0">
     <a href="{{ route('home') }}" class="flex items-center gap-2 no-underline min-w-0">
         <img src="{{ asset('dashboard-login.jpeg') }}" alt="Elkris Bio Health" class="w-8 h-8 md:w-10 md:h-10 object-contain rounded shrink-0" />
-        <span class="font-headline-sm text-[18px] md:text-[24px] font-bold tracking-tight text-primary-container truncate">Elkris Bio Health</span>
     </a>
 </div>
 <nav class="hidden md:flex items-center gap-8">
@@ -16,12 +15,14 @@
     <button class="md:hidden flex items-center p-2 text-primary-container" @click="mobileOpen = !mobileOpen" aria-label="Toggle navigation">
         <span class="material-symbols-outlined text-2xl" x-text="mobileOpen ? 'close' : 'menu'">menu</span>
     </button>
-@auth
-<a href="{{ route('admin.dashboard') }}" class="bg-primary-container text-white px-4 md:px-6 py-2 rounded-lg font-ui-label text-ui-label hover:bg-secondary transition-all active:scale-95 shadow-sm text-sm md:text-base">Dashboard</a>
-@else
-<a href="{{ route('login') }}" class="text-ui-label text-sm md:text-base text-outline hover:text-secondary transition-colors duration-200 font-medium whitespace-nowrap">Sign In</a>
-<a href="{{ route('login') }}" class="bg-primary-container text-white px-4 md:px-6 py-2 rounded-lg font-ui-label text-ui-label hover:bg-secondary transition-all active:scale-95 shadow-sm text-sm md:text-base whitespace-nowrap">Get Started</a>
-@endauth
+    <div class="hidden md:flex items-center gap-2 md:gap-3">
+    @auth
+    <a href="{{ route('admin.dashboard') }}" class="bg-primary-container text-white px-4 md:px-6 py-2 rounded-lg font-ui-label text-ui-label hover:bg-secondary transition-all active:scale-95 shadow-sm text-sm md:text-base">Dashboard</a>
+    @else
+    <a href="{{ route('login') }}" class="text-ui-label text-sm md:text-base text-outline hover:text-secondary transition-colors duration-200 font-medium whitespace-nowrap">Sign In</a>
+    <a href="{{ route('login') }}" class="bg-primary-container text-white px-4 md:px-6 py-2 rounded-lg font-ui-label text-ui-label hover:bg-secondary transition-all active:scale-95 shadow-sm text-sm md:text-base whitespace-nowrap">Get Started</a>
+    @endauth
+    </div>
 </div>
 </div>
 
@@ -50,6 +51,14 @@
             <span class="material-symbols-outlined text-[18px]">mail</span>
             Contact
         </a>
+        <div class="border-t border-surface-variant mt-4 pt-4 flex flex-col gap-3">
+            @auth
+            <a href="{{ route('admin.dashboard') }}" class="bg-primary-container text-white px-4 py-3 rounded-lg font-ui-label text-ui-label hover:bg-secondary transition-all active:scale-95 shadow-sm text-center">Dashboard</a>
+            @else
+            <a href="{{ route('login') }}" class="text-ui-label text-base text-outline hover:text-secondary transition-colors duration-200 font-medium text-center">Sign In</a>
+            <a href="{{ route('login') }}" class="bg-primary-container text-white px-4 py-3 rounded-lg font-ui-label text-ui-label hover:bg-secondary transition-all active:scale-95 shadow-sm text-center">Get Started</a>
+            @endauth
+        </div>
     </nav>
 </div>
 </header>
