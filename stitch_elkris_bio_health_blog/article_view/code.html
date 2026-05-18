@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Merriweather:ital,wght@0,400;0,700;1,400&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#424847",
+                    "primary-container": "#06402b",
+                    "on-surface": "#1a1c1b",
+                    "on-secondary-fixed": "#001f26",
+                    "on-error": "#ffffff",
+                    "surface-container-low": "#f4f4f1",
+                    "surface-container-highest": "#e2e3e0",
+                    "secondary-fixed-dim": "#87d2e4",
+                    "on-primary-fixed": "#002114",
+                    "on-background": "#1a1c1b",
+                    "on-secondary": "#ffffff",
+                    "outline": "#717973",
+                    "surface-tint": "#356850",
+                    "on-secondary-fixed-variant": "#004e5b",
+                    "on-primary-fixed-variant": "#1b503a",
+                    "primary-fixed": "#b8efd0",
+                    "on-surface-variant": "#404943",
+                    "secondary-fixed": "#a9edff",
+                    "tertiary-container": "#333939",
+                    "tertiary-fixed": "#dee3e3",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed-dim": "#c2c7c7",
+                    "on-tertiary": "#ffffff",
+                    "surface-bright": "#f9f9f7",
+                    "inverse-surface": "#2f3130",
+                    "secondary-container": "#a1ebfe",
+                    "surface-container-high": "#e8e8e6",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#dadad8",
+                    "error-container": "#ffdad6",
+                    "primary": "#002819",
+                    "error": "#ba1a1a",
+                    "tertiary": "#1e2323",
+                    "on-secondary-container": "#136c7d",
+                    "on-tertiary-container": "#9da2a1",
+                    "inverse-primary": "#9cd2b5",
+                    "surface-container": "#eeeeec",
+                    "background": "#f9f9f7",
+                    "on-primary": "#ffffff",
+                    "primary-fixed-dim": "#9cd2b5",
+                    "on-tertiary-fixed": "#171d1c",
+                    "outline-variant": "#c0c9c1",
+                    "surface": "#f9f9f7",
+                    "surface-variant": "#e2e3e0",
+                    "on-primary-container": "#77ac90",
+                    "secondary": "#086878",
+                    "inverse-on-surface": "#f1f1ef"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1280px",
+                    "base": "8px",
+                    "section-gap": "80px",
+                    "margin-mobile": "20px",
+                    "gutter": "24px",
+                    "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                    "caption": ["Inter"],
+                    "article-body": ["Merriweather"],
+                    "ui-label": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "article-body-mobile": ["Merriweather"]
+            },
+            "fontSize": {
+                    "caption": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                    "article-body": ["18px", {"lineHeight": "1.8", "fontWeight": "400"}],
+                    "ui-label": ["14px", {"lineHeight": "1", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-sm": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "article-body-mobile": ["16px", {"lineHeight": "1.7", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .progress-bar {
+            height: 4px;
+            width: 45%;
+            background-color: #086878;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-article-body selection:bg-secondary-container">
+<!-- Sticky Reading Progress Bar -->
+<div class="fixed top-0 left-0 w-full z-[60] bg-surface-variant/30 h-1">
+<div class="progress-bar"></div>
+</div>
+<!-- Shared Component: TopAppBar -->
+<header class="bg-surface dark:bg-on-background docked full-width top-0 sticky z-50 border-b border-surface-variant dark:border-on-surface-variant shadow-sm dark:shadow-none">
+<div class="flex items-center justify-between px-margin-mobile h-16 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-4">
+<button class="active:opacity-80 transition-opacity text-primary-container dark:text-primary-fixed-dim">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-headline-sm text-headline-sm font-bold tracking-tight text-primary-container dark:text-primary-fixed-dim">Elkris Bio Health</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-secondary dark:text-secondary-fixed-dim font-bold font-ui-label text-ui-label hover:text-secondary dark:hover:text-secondary-fixed-dim transition-colors duration-200" href="#">Blog Home</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-ui-label text-ui-label hover:text-secondary dark:hover:text-secondary-fixed-dim transition-colors duration-200" href="#">Categories</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-ui-label text-ui-label hover:text-secondary dark:hover:text-secondary-fixed-dim transition-colors duration-200" href="#">Resources</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-ui-label text-ui-label hover:text-secondary dark:hover:text-secondary-fixed-dim transition-colors duration-200" href="#">Newsletter</a>
+</nav>
+<button class="bg-primary-container text-white px-6 py-2 rounded-lg font-ui-label text-ui-label hover:bg-secondary transition-all active:scale-95">
+                Subscribe
+            </button>
+</div>
+</header>
+<main class="w-full">
+<!-- Hero Section -->
+<div class="w-full bg-surface-container-low py-12 md:py-20">
+<div class="max-w-[900px] mx-auto px-margin-mobile">
+<div class="flex flex-col gap-6">
+<div class="inline-flex items-center px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-ui-label text-ui-label self-start">
+                        Bio-Clinical Research
+                    </div>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary leading-tight">
+                        The Bio-Clinical Impact of Plant-Based Phytochemicals on Cellular Longevity
+                    </h1>
+<div class="flex items-center gap-4 border-l-2 border-secondary pl-4 py-2">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-high">
+<img alt="Author" data-alt="A professional close-up portrait of a female scientist with a warm smile, wearing a white laboratory coat in a brightly lit, modern medical research facility. The lighting is soft and clinical, highlighting her expert and approachable demeanor. The background features blurred glass laboratory equipment and a clean, minimalist aesthetic aligned with corporate modern wellness brands." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmHXZECN4ZFWLAXwWphKqUBPfjtB-Dchgf5CIPRuqr5Vq_7sQYSzpSo22bbB3Ki4lt0ba_WPAe91ziRNiCnjoHUfPc_wjoz73T7GyY3vOLG1TUujlfnCW91Vi7gebZJOCH46qZmU-ewzhVsH1ebsCbr_M1UcKKv7aIGDmQ1WHwd2WGtGF2daG6aKXe5p1h5wDru2gxc_ktK9uIiWSaBD0N82SPB6pbIz_AtHBkx2a6riaKCBdsmYEmWdZk6mk2NZAj0PvIFmeZOQ0"/>
+</div>
+<div>
+<p class="font-ui-label text-ui-label font-bold text-on-surface">Dr. Elena Sterling</p>
+<p class="font-caption text-caption text-on-surface-variant">Senior Research Fellow • March 14, 2024 • 8 min read</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Featured Image -->
+<section class="max-w-container-max mx-auto px-margin-mobile -mt-8 md:-mt-12">
+<div class="rounded-xl overflow-hidden shadow-xl">
+<img alt="Feature" class="w-full aspect-[21/9] object-cover" data-alt="A high-resolution, macro photograph of vibrant green botanical leaves with crystalline water droplets, captured in a sterile, brightly lit laboratory environment. The composition is clean and minimalist, emphasizing the 'Scientific Vitality' brand theme. Natural sunlight filters through, creating soft shadows and highlighting the intricate textures of the plant life against a soft-focus medical backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAS5MIG4SvHZYIzPaBRPdJxCbBVntAYFggGzT7shIc--gmgIL2m-_Lu9CFYPrTcEisbmEpcO7Olfi9ZTF0sdW1TGD6V3oKiJBwA2ARQJnUpDH0YS6x9V7pRzesaI5-1b70BOQrnSf4nPyFhbeLOJvAfcMsvZzbXxC7EdG5FDZovgNN5X4jvAZ2cW_OKQ802umhOu6bMlu5cuVxMuTkHle9xMMuUdvUv1iXZaXHOWlIw8Vl8tJlNJbhNmsnInqLIZPgPnu6srpjAlE"/>
+</div>
+</section>
+<!-- Article Content -->
+<article class="max-w-[800px] mx-auto px-margin-mobile mt-16 md:mt-24">
+<div class="font-article-body text-article-body text-on-surface-variant space-y-8 leading-relaxed">
+<p class="first-letter:text-5xl first-letter:font-bold first-letter:text-primary first-letter:mr-3 first-letter:float-left">
+                    Recent breakthroughs in cellular biology have illuminated the profound relationship between our metabolic pathways and specific plant-derived compounds. For decades, the medical community has recognized the basic antioxidant properties of vegetables, but new data suggests a much deeper clinical interaction at the mitochondrial level.
+                </p>
+<p>
+                    Phytochemicals such as sulforaphane and resveratrol are no longer viewed merely as nutritional supplements. In controlled clinical environments, these compounds act as signaling molecules, triggering endogenous defense mechanisms that preserve DNA integrity. This "hormetic" effect—where a mild biological stressor induces a strengthening response—is at the core of Elkris's latest vitality studies.
+                </p>
+<!-- Key Takeaways Box -->
+<aside class="bg-surface-container-low border-l-4 border-secondary p-8 my-12 rounded-r-xl shadow-sm">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">verified</span>
+                        Key Takeaways
+                    </h3>
+<ul class="space-y-4">
+<li class="flex gap-4">
+<span class="material-symbols-outlined text-secondary shrink-0">check_circle</span>
+<span class="font-ui-label text-on-surface">Mitochondrial resilience is significantly enhanced by sulforaphane-rich diets.</span>
+</li>
+<li class="flex gap-4">
+<span class="material-symbols-outlined text-secondary shrink-0">check_circle</span>
+<span class="font-ui-label text-on-surface">Targeted phytochemical delivery can reduce systemic oxidative stress markers by up to 22%.</span>
+</li>
+<li class="flex gap-4">
+<span class="material-symbols-outlined text-secondary shrink-0">check_circle</span>
+<span class="font-ui-label text-on-surface">Consistent lifestyle integration of bio-actives provides superior long-term results compared to isolated bolus doses.</span>
+</li>
+</ul>
+</aside>
+<h2 class="font-headline-md text-headline-md text-primary mt-12 mb-6">The Mechanism of Action</h2>
+<p>
+                    To understand how these botanicals function, one must look at the Nrf2 pathway—a master regulator of antioxidant genes. When certain phytochemicals enter the bloodstream, they "prime" this pathway, effectively teaching the cell to produce more of its own protective enzymes. This is the definition of Scientific Vitality: leveraging nature to optimize human biology.
+                </p>
+<!-- Data Points Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter my-12">
+<div class="p-6 border border-outline-variant rounded-lg bg-white shadow-sm flex flex-col items-center text-center gap-4">
+<span class="material-symbols-outlined text-secondary text-4xl">vital_signs</span>
+<div>
+<p class="font-headline-sm text-headline-sm text-primary">84%</p>
+<p class="font-caption text-caption text-on-surface-variant">Cellular Recovery Rate Increase</p>
+</div>
+</div>
+<div class="p-6 border border-outline-variant rounded-lg bg-white shadow-sm flex flex-col items-center text-center gap-4">
+<span class="material-symbols-outlined text-secondary text-4xl">science</span>
+<div>
+<p class="font-headline-sm text-headline-sm text-primary">12-Hour</p>
+<p class="font-caption text-caption text-on-surface-variant">Bio-availability Peak Window</p>
+</div>
+</div>
+</div>
+<p>
+                    As we move forward into an era of personalized medicine, the integration of bio-clinical data with holistic wellness practices is paramount. At Elkris Bio Health, we continue to bridge this gap, ensuring that every recommendation is backed by rigorous peer-reviewed evidence.
+                </p>
+<!-- Citations -->
+<div class="border-l-2 border-outline-variant pl-6 mt-16">
+<p class="font-caption text-caption text-on-surface-variant italic">
+                        1. Sterling, E. et al. (2023). "Phytochemical Signaling in Human Fibroblasts." Journal of Clinical Longevity, 14(2).<br/>
+                        2. Chen, Y. (2024). "Mitochondrial Dynamics and Nutrition." Bio-Medical Research Reviews.
+                    </p>
+</div>
+</div>
+</article>
+<!-- Related Articles -->
+<section class="max-w-container-max mx-auto px-margin-mobile mt-section-gap mb-24">
+<h3 class="font-headline-md text-headline-md text-primary mb-8">Further Scientific Insights</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Related Card 1 -->
+<div class="bg-white rounded-lg overflow-hidden border border-outline-variant shadow-sm hover:shadow-md transition-all">
+<img alt="Related 1" data-alt="A clean, scientific photograph of microscopic cellular structures glowing with a soft blue bioluminescence against a deep forest green background. The image is crisp and clinical, symbolizing advanced medical research. High-key studio lighting ensures a professional and modern look consistent with evidence-based health publications." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrtzCtqIyElM9v6xatef_8w3Kf1msr95G02q8oriZZmxYahHpNMZ_rYu5t1bWRDSQCpN31JnQescl62XRoesy4ttuA2nDN8HeG_HQox27qi8BWo7gLR8IkyIkTVwE2tasJqTLfBxZ1mN_lBZwts4jUyS4Lc9FzD0TmP3fHnOqFOmWdbAaqVNHHj31if3QHgLPMLx32I58J4oQWwYzVkD9hDF_gPE8UbRLQWp29f3oZpgSFIAPpTn5kpoAfEXKBWc_ft1YDgQqaTyI"/>
+<div class="p-6 flex flex-col gap-3">
+<span class="font-ui-label text-[10px] uppercase tracking-widest text-secondary font-bold">Research Update</span>
+<h4 class="font-headline-sm text-headline-sm text-primary leading-tight">Advanced Glucose Monitoring in Longevity</h4>
+<p class="font-caption text-caption text-on-surface-variant line-clamp-2">How real-time metabolic tracking is redefining our understanding of personalized nutrition.</p>
+<a class="text-secondary font-ui-label text-ui-label flex items-center gap-1 mt-2 hover:underline" href="#">Read Full Article <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+</div>
+<!-- Related Card 2 -->
+<div class="bg-white rounded-lg overflow-hidden border border-outline-variant shadow-sm hover:shadow-md transition-all">
+<img alt="Related 2" data-alt="A minimalist laboratory setup showing a glass pipette dispensing a clear liquid into a test tube containing a vivid botanical extract. The background is a crisp white medical tile wall. The lighting is bright and even, creating a sense of precision and clinical purity. Colors are dominated by forest green and clinical white." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAl05O3VbwcxxyIonoWSR_xID99oH5tCNlRAGboIphypDLWDR7wUPaSaE379LnZeeosmbzK9LAkzV5KK2HL2AEBHF_M8mxP29TIoRyHoEYl2A3P8daRpVsqxOPk3fBrx_SeHlY53RKt9PWwptUoKWiuaInNP79Z-WJLtZtCmN7z1Ct3hfsRVFFBTHAf2zPCzlzolCwepqs1IIu-QcqmjbmevM5rqtT2Z21jYAoOESAQX7nnbd8UbqQifMFOm9RMZALkDUIz-cbqy8c"/>
+<div class="p-6 flex flex-col gap-3">
+<span class="font-ui-label text-[10px] uppercase tracking-widest text-secondary font-bold">Clinical Study</span>
+<h4 class="font-headline-sm text-headline-sm text-primary leading-tight">Optimizing Circadian Rhythms for Health</h4>
+<p class="font-caption text-caption text-on-surface-variant line-clamp-2">The biological importance of sleep architecture in cellular repair and immune function.</p>
+<a class="text-secondary font-ui-label text-ui-label flex items-center gap-1 mt-2 hover:underline" href="#">Read Full Article <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+</div>
+<!-- Related Card 3 -->
+<div class="bg-white rounded-lg overflow-hidden border border-outline-variant shadow-sm hover:shadow-md transition-all">
+<img alt="Related 3" data-alt="A serene outdoor setting featuring a person practicing yoga at sunrise in a lush green park. The light is golden and warm, creating a feeling of vitality and holistic wellness. The shot is high-quality and professional, balancing clinical medical topics with accessible lifestyle imagery, adhering to the corporate modern aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJTmhp5TWaQyzPOQH23UP4ZLYd98TU31xGpweiTApysm_CFvRBCLtovmJ6igTCjiYdYwiDcYETmFOO94XsnL7Xs9p41Wz5H5-J1S-dIH8bf27LOHsegKBn5B8meSGbggM1BWLuUmJ9UdcuTc15t96l4gYYeJFuIXQ3XzrqDVXQ352VEJWfBCmH13BzQSvwYXHm63Om-J2eaJuPSTAYy0NSvE0cnAqrBA43v5Kmc5HXGyKksRvhPYzlgzMCstkdrg46s-5ry87Bjrg"/>
+<div class="p-6 flex flex-col gap-3">
+<span class="font-ui-label text-[10px] uppercase tracking-widest text-secondary font-bold">Lifestyle Guide</span>
+<h4 class="font-headline-sm text-headline-sm text-primary leading-tight">Movement as Molecular Medicine</h4>
+<p class="font-caption text-caption text-on-surface-variant line-clamp-2">Exploring how consistent low-intensity movement triggers beneficial epigenetic changes.</p>
+<a class="text-secondary font-ui-label text-ui-label flex items-center gap-1 mt-2 hover:underline" href="#">Read Full Article <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Shared Component: Footer -->
+<footer class="bg-surface-container-lowest dark:bg-on-tertiary-fixed-variant w-full rounded-t-xl border-t border-outline-variant dark:border-on-surface-variant mt-section-gap">
+<div class="w-full px-margin-mobile py-8 flex flex-col items-center gap-base max-w-container-max mx-auto text-center">
+<span class="font-headline-sm text-headline-sm font-bold text-primary-container dark:text-primary-fixed-dim">Elkris Bio Health</span>
+<p class="font-caption text-caption text-on-surface-variant dark:text-on-tertiary-container">© 2024 Elkris Bio Health. Scientific Vitality.</p>
+<div class="flex gap-6 mt-4">
+<a class="text-on-surface-variant dark:text-on-tertiary-container hover:text-secondary underline decoration-secondary/30 transition-all font-caption text-caption" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant dark:text-on-tertiary-container hover:text-secondary underline decoration-secondary/30 transition-all font-caption text-caption" href="#">Terms of Service</a>
+<a class="text-on-surface-variant dark:text-on-tertiary-container hover:text-secondary underline decoration-secondary/30 transition-all font-caption text-caption" href="#">Contact Us</a>
+</div>
+</div>
+</footer>
+</body></html>

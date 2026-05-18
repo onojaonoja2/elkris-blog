@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Merriweather:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#424847",
+                    "primary-container": "#06402b",
+                    "on-surface": "#1a1c1b",
+                    "on-secondary-fixed": "#001f26",
+                    "on-error": "#ffffff",
+                    "surface-container-low": "#f4f4f1",
+                    "surface-container-highest": "#e2e3e0",
+                    "secondary-fixed-dim": "#87d2e4",
+                    "on-primary-fixed": "#002114",
+                    "on-background": "#1a1c1b",
+                    "on-secondary": "#ffffff",
+                    "outline": "#717973",
+                    "surface-tint": "#356850",
+                    "on-secondary-fixed-variant": "#004e5b",
+                    "on-primary-fixed-variant": "#1b503a",
+                    "primary-fixed": "#b8efd0",
+                    "on-surface-variant": "#404943",
+                    "secondary-fixed": "#a9edff",
+                    "tertiary-container": "#333939",
+                    "tertiary-fixed": "#dee3e3",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed-dim": "#c2c7c7",
+                    "on-tertiary": "#ffffff",
+                    "surface-bright": "#f9f9f7",
+                    "inverse-surface": "#2f3130",
+                    "secondary-container": "#a1ebfe",
+                    "surface-container-high": "#e8e8e6",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#dadad8",
+                    "error-container": "#ffdad6",
+                    "primary": "#002819",
+                    "error": "#ba1a1a",
+                    "tertiary": "#1e2323",
+                    "on-secondary-container": "#136c7d",
+                    "on-tertiary-container": "#9da2a1",
+                    "inverse-primary": "#9cd2b5",
+                    "surface-container": "#eeeeec",
+                    "background": "#f9f9f7",
+                    "on-primary": "#ffffff",
+                    "primary-fixed-dim": "#9cd2b5",
+                    "on-tertiary-fixed": "#171d1c",
+                    "outline-variant": "#c0c9c1",
+                    "surface": "#f9f9f7",
+                    "surface-variant": "#e2e3e0",
+                    "on-primary-container": "#77ac90",
+                    "secondary": "#086878",
+                    "inverse-on-surface": "#f1f1ef"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1280px",
+                    "base": "8px",
+                    "section-gap": "80px",
+                    "margin-mobile": "20px",
+                    "gutter": "24px",
+                    "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                    "caption": ["Inter"],
+                    "article-body": ["Merriweather"],
+                    "ui-label": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "article-body-mobile": ["Merriweather"]
+            },
+            "fontSize": {
+                    "caption": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                    "article-body": ["18px", {"lineHeight": "1.8", "fontWeight": "400"}],
+                    "ui-label": ["14px", {"lineHeight": "1", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-sm": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "article-body-mobile": ["16px", {"lineHeight": "1.7", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-ui-label selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopAppBar -->
+<header class="bg-surface docked full-width top-0 sticky z-50 shadow-sm border-b border-surface-variant">
+<div class="flex items-center justify-between px-margin-mobile h-16 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-base">
+<button class="active:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-primary-container" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-sm text-headline-sm font-bold tracking-tight text-primary-container">Elkris Bio Health</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-ui-label text-ui-label text-secondary font-bold transition-colors duration-200" href="#">Blog Home</a>
+<a class="font-ui-label text-ui-label text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Categories</a>
+<a class="font-ui-label text-ui-label text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Resources</a>
+<a class="font-ui-label text-ui-label text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Newsletter</a>
+</nav>
+<button class="active:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-primary-container" data-icon="search">search</span>
+</button>
+</div>
+</header>
+<main class="w-full">
+<!-- Hero Section: Editor's Choice -->
+<section class="max-w-container-max mx-auto px-margin-mobile pt-8 md:pt-12">
+<div class="relative w-full rounded-xl overflow-hidden shadow-sm bg-surface-container-low flex flex-col md:flex-row min-h-[500px]">
+<div class="w-full md:w-3/5 h-64 md:h-auto relative">
+<img alt="Scientific Vitality Hero" class="w-full h-full object-cover" data-alt="A clean, clinical flat-lay photograph of vibrant leafy greens, fresh avocados, and scientific glass beakers on a pristine white surface. The lighting is bright and high-key, emphasizing a clinical yet organic feel. Soft teal and deep forest green shadows create a sense of depth and scientific vitality. The composition is balanced, airy, and professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHBcKvSPDVne04M1OVVZi_oRPY1ZKejq3ueygdHvEk5RuxdLGTj-ByBsHQ-UFGblmClRKzdDiY6GXonVadwTYRhxSDWIrv8wQJveAxM_D0anOpVfbkCb5oislrl8R-X4ZrYwMIcKheZe4uDlTr79vmqcLIWQUALyfGPLD1CjTbnsZ-vBx9ax3U92O0byRGeVM4IQQ_5hLMpriK4iHqMd_x0-XvK-82IcggOxrjxUnsDV-d6QILVb78Y5tDGygferdyrRGKQWDBUM4"/>
+<div class="absolute top-4 left-4">
+<span class="bg-primary-container text-on-primary text-caption font-bold px-4 py-1 rounded-full uppercase tracking-wider">Editor's Choice</span>
+</div>
+</div>
+<div class="w-full md:w-2/5 p-8 md:p-12 flex flex-col justify-center gap-6">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-[18px]" data-icon="clinical_notes">clinical_notes</span>
+<span class="text-ui-label font-bold">Research Insight</span>
+</div>
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary-container">The Molecular Impact of Phytonutrients on Cellular Recovery</h2>
+<p class="font-article-body-mobile md:font-article-body text-article-body-mobile md:text-article-body text-on-surface-variant">Exploring how bioactive compounds in specific plant-based diets trigger epigenetic responses for longevity and tissue repair.</p>
+<div class="flex items-center gap-4 mt-2">
+<button class="bg-primary-container text-on-primary px-8 py-3 rounded-lg font-ui-label text-ui-label font-bold hover:bg-secondary transition-all shadow-md active:scale-95">Read Article</button>
+<span class="text-caption text-outline font-medium">12 min read</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Trending in Nutrition: Horizontal Scroll -->
+<section class="mt-section-gap overflow-hidden">
+<div class="max-w-container-max mx-auto px-margin-mobile mb-6 flex justify-between items-end">
+<div>
+<h3 class="font-headline-md text-headline-md text-primary-container">Trending in Nutrition</h3>
+<p class="text-on-surface-variant font-ui-label">Expert-vetted nutrition science for your daily life.</p>
+</div>
+<div class="flex gap-2">
+<button class="p-2 border-2 border-outline-variant text-outline-variant rounded-full hover:border-secondary hover:text-secondary transition-all active:scale-90">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="p-2 border-2 border-secondary text-secondary rounded-full hover:bg-secondary hover:text-white transition-all active:scale-90">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex overflow-x-auto gap-gutter px-margin-mobile no-scrollbar pb-8 max-w-container-max mx-auto">
+<!-- Trending Card 1 -->
+<div class="min-w-[280px] md:min-w-[320px] bg-white rounded-xl shadow-sm border border-surface-variant p-4 flex flex-col gap-4 group cursor-pointer hover:shadow-md transition-shadow">
+<div class="aspect-video rounded-lg overflow-hidden relative">
+<img alt="Nutrition Trends" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A top-down view of a vibrant Mediterranean salad in a ceramic bowl, featuring bright cherry tomatoes, olives, and feta cheese. The lighting is warm and organic, with natural sunlight creating soft shadows. The overall aesthetic is clean, healthy, and clinical, emphasizing the freshness of ingredients within a minimalist kitchen environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmAPBxpJNcbHSE_8GOkg87tNZP-NHMzOtppmxhvPVzWgphtcM95SO2BF9k5Ak5IN4BckYWU4SEwhLXjxI8_sjicOECDZNKkcJd4Exy0oA6KjYA_Ar6umBEZzb3HZKpyzzvaTqJ2ZhQj-_gdASHsEoGhnMztjptiJsusYjws1ItTO4S0hsK-uostBEQVnSY153PpSFdo_80ThwjIHoQIBtALBoA0P8XfyKEJtulzga6CnSQdqyATL4vJWUz4l4rtCkFApX2yEB4FhA"/>
+</div>
+<div class="flex flex-col gap-2">
+<span class="text-secondary font-bold text-caption tracking-widest uppercase">Microbiome</span>
+<h4 class="font-headline-sm text-headline-sm text-primary group-hover:text-secondary transition-colors">Fermented Foods: The Gut-Brain Connection</h4>
+<div class="flex items-center justify-between text-caption text-outline mt-2">
+<span>Dr. Elias Thorne</span>
+<span>6 min read</span>
+</div>
+</div>
+</div>
+<!-- Trending Card 2 -->
+<div class="min-w-[280px] md:min-w-[320px] bg-white rounded-xl shadow-sm border border-surface-variant p-4 flex flex-col gap-4 group cursor-pointer hover:shadow-md transition-shadow">
+<div class="aspect-video rounded-lg overflow-hidden relative">
+<img alt="Omega Fats" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A close-up shot of raw walnuts and pumpkin seeds in minimalist white ceramic spoons. The background is a soft, out-of-focus laboratory setting with a cool teal color palette. The lighting is diffused and professional, highlighting the textures of the nuts and seeds to emphasize their nutritional value and biological potency." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvIXspkqEQX0oscUtIcSP8zgxahRDeoaS85tergS_XcEO_PQYS2tBgERhG5yU4jTZIPvfIiySxhEnxd5slna3lz-yaKi1ZO7rfYZtFDmX0Zz-bBH5MeGykY0H6xzYfv3zRhn2VkUOmNDoaN6MRzpHUg2FXkM_MoxXoiJ0o2Wta1m6opYRMoKNPjzikyxJW63RMLGqcI3vmrRX-62e5GRuPNJ7bsP3iZBDdshXWrNsbM3LFK15ChDvfFIri_uPSAjde2enh-F-nCyE"/>
+</div>
+<div class="flex flex-col gap-2">
+<span class="text-secondary font-bold text-caption tracking-widest uppercase">Bio-Lipids</span>
+<h4 class="font-headline-sm text-headline-sm text-primary group-hover:text-secondary transition-colors">Optimizing Omega-3 Ratios for Heart Health</h4>
+<div class="flex items-center justify-between text-caption text-outline mt-2">
+<span>Nutrition Team</span>
+<span>8 min read</span>
+</div>
+</div>
+</div>
+<!-- Trending Card 3 -->
+<div class="min-w-[280px] md:min-w-[320px] bg-white rounded-xl shadow-sm border border-surface-variant p-4 flex flex-col gap-4 group cursor-pointer hover:shadow-md transition-shadow">
+<div class="aspect-video rounded-lg overflow-hidden relative">
+<img alt="Supplementation" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A macro photograph of an effervescent vitamin tablet dissolving in clear water within a laboratory beaker. Bubbles of air and light are suspended in the liquid, backlit by a soft teal glow. The aesthetic is extremely clinical and high-tech, symbolizing scientific innovation in personal health and supplementation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCj-1xqneKTsJuC2mYl0u_EIi6q8O3SD8PZaFgLVoxapd-FfI4kGGItgdTIZ090LbMaBA0krD5cm3KYom1e5QMcZOoQSx_XfecKZKweBjvuOlEdZzyfHFWWyCWD-ud2GQgj_4rV5R-xATKAt1ogpbY13fGBINxOxoFeJfIG0UfFoDQWNXaXYTJmn2I3Nzy-sw6fNUbysQCrLBDmSd5aNjdHMqXX2OgNcNtk-ExUpV2C6X7Oji-jG43hy3RhvbmlsVfDJI_z8xLuJWg"/>
+</div>
+<div class="flex flex-col gap-2">
+<span class="text-secondary font-bold text-caption tracking-widest uppercase">Supplementation</span>
+<h4 class="font-headline-sm text-headline-sm text-primary group-hover:text-secondary transition-colors">The Bioavailability Myth: Myths vs Reality</h4>
+<div class="flex items-center justify-between text-caption text-outline mt-2">
+<span>Prof. Sarah Miller</span>
+<span>10 min read</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Articles: Asymmetric Grid -->
+<section class="mt-section-gap max-w-container-max mx-auto px-margin-mobile">
+<h3 class="font-headline-md text-headline-md text-primary-container mb-8">Recent Scientific Insights</h3>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Large Featured Item -->
+<div class="md:col-span-8 group cursor-pointer">
+<div class="bg-white rounded-xl overflow-hidden shadow-sm border border-surface-variant h-full flex flex-col md:flex-row">
+<div class="md:w-1/2 h-64 md:h-full">
+<img alt="Scientific Research" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A professional medical researcher in a white lab coat examining a plant specimen under a high-end microscope. The setting is a modern, brightly lit laboratory with stainless steel equipment and glass walls. The color palette features cool whites, soft greens, and clinical teals, creating an atmosphere of rigorous scientific exploration and health innovation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIzjGW8IMsFD_bO-Vv6Pfc7l_GwZBnRzDVMJjhxogT7eqgg_cFnYGmYZlEHxvIKPtxKH0yEePIlNaTGm9CZvuWirX7Jo2dQAhwhyXgR9gfn7EPiy1r7eLsMGwEIWPd9oOoex6SbiEouS2Z2AZsmek5USC-FNOrQq3F6tlVFbsBt_dC6DF6mXO-Dn-3z94_naq7pmrcBtDdIwTVJ4-X6VdjxbdiQFwzK2-vWXAP4usMJpYJRRc1n6PctSwgz4LeLgRfLorvO-acS3o"/>
+</div>
+<div class="md:w-1/2 p-8 flex flex-col justify-between">
+<div class="flex flex-col gap-4">
+<div class="flex gap-2">
+<span class="bg-surface-container-high text-primary-container text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Clinical Trials</span>
+<span class="bg-secondary-container text-on-secondary-container text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Neurology</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-primary group-hover:text-secondary transition-colors">Cognitive Performance and Glucose Stability: New Clinical Findings</h4>
+<p class="text-on-surface-variant font-article-body-mobile text-article-body-mobile">A comprehensive review of the latest meta-analysis regarding the relationship between blood sugar spikes and cognitive decline in aging populations.</p>
+</div>
+<div class="flex items-center gap-4 pt-6 border-t border-outline-variant mt-6">
+<span class="material-symbols-outlined text-secondary" data-icon="schedule">schedule</span>
+<span class="text-ui-label text-on-surface-variant font-medium">Published 2 days ago • 15 min read</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Column Items -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<!-- Smaller Card 1 -->
+<div class="bg-white rounded-xl p-6 border border-surface-variant shadow-sm group cursor-pointer hover:border-secondary transition-colors">
+<span class="bg-surface-container-high text-primary-container text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter mb-4 inline-block">Metabolism</span>
+<h4 class="font-headline-sm text-headline-sm text-primary group-hover:text-secondary transition-colors mb-2">Intermittent Fasting and Autophagy: The Science</h4>
+<p class="text-on-surface-variant text-ui-label line-clamp-2">How cellular recycling mechanisms respond to scheduled abstinence from caloric intake.</p>
+<div class="flex items-center gap-2 mt-4 text-caption text-outline">
+<span class="material-symbols-outlined text-[16px]" data-icon="visibility">visibility</span>
+<span>4.2k reads</span>
+</div>
+</div>
+<!-- Smaller Card 2 -->
+<div class="bg-white rounded-xl p-6 border border-surface-variant shadow-sm group cursor-pointer hover:border-secondary transition-colors">
+<span class="bg-surface-container-high text-primary-container text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter mb-4 inline-block">Immunity</span>
+<h4 class="font-headline-sm text-headline-sm text-primary group-hover:text-secondary transition-colors mb-2">Botanicals that Boost T-Cell Response</h4>
+<p class="text-on-surface-variant text-ui-label line-clamp-2">Exploring the synergistic effects of medicinal mushrooms and herbal extracts on immune health.</p>
+<div class="flex items-center gap-2 mt-4 text-caption text-outline">
+<span class="material-symbols-outlined text-[16px]" data-icon="visibility">visibility</span>
+<span>2.8k reads</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter Section -->
+<section class="mt-section-gap mb-section-gap max-w-container-max mx-auto px-margin-mobile">
+<div class="bg-primary-container rounded-xl p-8 md:p-16 relative overflow-hidden flex flex-col md:flex-row items-center gap-12">
+<!-- Abstract Background Shapes -->
+<div class="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none">
+<svg class="w-full h-full transform translate-x-1/4 scale-150" viewbox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<path d="M44.7,-76.4C58.1,-69.2,69.5,-57.4,78.2,-43.8C86.9,-30.2,93,-15.1,91.8,-0.7C90.5,13.7,82.1,27.3,72.4,39.6C62.8,51.8,52,62.6,39.1,70.9C26.1,79.2,13.1,85,0.1,84.9C-12.9,84.8,-25.8,78.8,-38,71.2C-50.2,63.6,-61.7,54.4,-70.7,42.6C-79.6,30.8,-86,15.4,-86.7,-0.4C-87.3,-16.2,-82.2,-32.4,-73.2,-46.1C-64.2,-59.8,-51.3,-71,-37.2,-77.7C-23.1,-84.4,-7.8,-86.6,7.8,-90.1C23.4,-93.6,44.7,-83.5,44.7,-76.4Z" fill="#ffffff" transform="translate(100 100)"></path>
+</svg>
+</div>
+<div class="relative z-10 md:w-1/2 text-center md:text-left">
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary-fixed mb-4">Vitality Newsletter</h2>
+<p class="font-article-body text-primary-fixed-dim opacity-90 max-w-md">Join 50,000+ professionals receiving weekly evidence-based wellness briefings delivered directly to their inbox.</p>
+</div>
+<div class="relative z-10 md:w-1/2 w-full">
+<form class="flex flex-col gap-4">
+<div class="flex flex-col gap-1">
+<label class="text-white text-ui-label mb-1" for="email-sub">Professional Email Address</label>
+<div class="flex flex-col md:flex-row gap-4">
+<input class="flex-grow bg-white border border-outline-variant px-6 py-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary text-primary-container" id="email-sub" placeholder="dr.smith@clinical.com" type="email"/>
+<button class="bg-secondary text-white font-bold px-8 py-4 rounded-lg hover:bg-on-secondary-container transition-all shadow-lg" type="submit">Subscribe</button>
+</div>
+</div>
+<p class="text-on-primary-container text-caption">By subscribing, you agree to our <a class="underline" href="#">Privacy Policy</a>. No spam, only science.</p>
+</form>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest w-full rounded-t-xl border-t border-outline-variant mt-section-gap">
+<div class="w-full px-margin-mobile py-8 flex flex-col items-center gap-base max-w-container-max mx-auto text-center">
+<div class="font-headline-sm text-headline-sm font-bold text-primary-container mb-4">Elkris Bio Health</div>
+<nav class="flex flex-wrap justify-center gap-6 mb-6">
+<a class="text-ui-label text-on-surface-variant hover:text-secondary underline decoration-secondary/30 transition-all" href="#">Privacy Policy</a>
+<a class="text-ui-label text-on-surface-variant hover:text-secondary underline decoration-secondary/30 transition-all" href="#">Terms of Service</a>
+<a class="text-ui-label text-on-surface-variant hover:text-secondary underline decoration-secondary/30 transition-all" href="#">Contact Us</a>
+</nav>
+<div class="text-caption text-on-surface-variant opacity-90">
+                © 2024 Elkris Bio Health. Scientific Vitality.
+            </div>
+<div class="mt-4 flex gap-4">
+<span class="material-symbols-outlined text-primary-container cursor-pointer hover:text-secondary transition-colors" data-icon="science">science</span>
+<span class="material-symbols-outlined text-primary-container cursor-pointer hover:text-secondary transition-colors" data-icon="health_and_safety">health_and_safety</span>
+<span class="material-symbols-outlined text-primary-container cursor-pointer hover:text-secondary transition-colors" data-icon="biotech">biotech</span>
+</div>
+</div>
+</footer>
+</body></html>
