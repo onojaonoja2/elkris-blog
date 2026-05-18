@@ -51,6 +51,11 @@
                 <td class="px-6 py-4 text-caption text-outline hidden lg:table-cell">{{ $post->created_at->format('M j, Y') }}</td>
                 <td class="px-6 py-4 text-right">
                     <div class="flex items-center justify-end gap-2">
+                        @if($post->is_published)
+                        <button onclick="copyPostUrl('{{ route('blog.show', $post) }}', this)" class="p-2 text-outline hover:text-secondary transition-colors" title="Copy link">
+                            <span class="material-symbols-outlined">link</span>
+                        </button>
+                        @endif
                         <a href="{{ route('blog.show', $post) }}" class="p-2 text-outline hover:text-secondary transition-colors" title="Preview" target="_blank">
                             <span class="material-symbols-outlined">visibility</span>
                         </a>
@@ -90,4 +95,19 @@
     {{ $posts->links() }}
 </div>
 @endif
+
 @endsection
+
+@push('scripts')
+<script>
+function copyPostUrl(url, btn) {
+    navigator.clipboard.writeText(url).then(() => {
+        const icon = btn.querySelector('span');
+        icon.textContent = 'check';
+        setTimeout(() => {
+            icon.textContent = 'link';
+        }, 1500);
+    });
+}
+</script>
+@endpush

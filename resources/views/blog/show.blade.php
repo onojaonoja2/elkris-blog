@@ -91,6 +91,14 @@
 
 {{-- Article Footer --}}
 <div class="max-w-[800px] mx-auto px-5 mt-12 pt-8 border-t border-outline-variant">
+<div class="flex items-center gap-4 mb-6">
+    <span class="text-caption text-outline font-ui-label">Share:</span>
+    <button type="button" onclick="copyPostUrl()" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container-high hover:bg-secondary hover:text-white text-on-surface-variant text-ui-label transition-colors" id="copy-url-btn">
+        <span class="material-symbols-outlined text-lg" id="copy-icon">link</span>
+        <span id="copy-text">Copy Link</span>
+    </button>
+</div>
+
 <div class="flex flex-wrap gap-2 mb-8">
     @foreach($post->tags as $tag)
     <a href="{{ route('blog.tag', $tag) }}" class="inline-flex items-center px-3 py-1 rounded-full border border-outline-variant text-on-surface-variant text-caption hover:bg-surface-container-high hover:border-secondary transition-all no-underline">#{{ $tag->name }}</a>
@@ -195,5 +203,30 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', updateProgress);
     updateProgress();
 });
+
+function copyPostUrl() {
+    const copyBtn = document.getElementById('copy-url-btn');
+    const copyIcon = document.getElementById('copy-icon');
+    const copyText = document.getElementById('copy-text');
+
+    navigator.clipboard.writeText(window.location.href).then(() => {
+        copyIcon.textContent = 'check';
+        copyText.textContent = 'Copied!';
+        copyBtn.classList.add('bg-secondary', 'text-white');
+        copyBtn.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+
+        setTimeout(() => {
+            copyIcon.textContent = 'link';
+            copyText.textContent = 'Copy Link';
+            copyBtn.classList.remove('bg-secondary', 'text-white');
+            copyBtn.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+        }, 2000);
+    }).catch(() => {
+        copyText.textContent = 'Failed';
+        setTimeout(() => {
+            copyText.textContent = 'Copy Link';
+        }, 2000);
+    });
+}
 </script>
 @endpush
