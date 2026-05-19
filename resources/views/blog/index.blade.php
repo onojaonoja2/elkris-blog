@@ -26,7 +26,7 @@
     <section class="max-w-[1280px] mx-auto px-5 pt-4 md:pt-6">
         <div class="relative w-full rounded-xl overflow-hidden shadow-sm bg-surface-container-low flex flex-col md:flex-row min-h-[350px]">
             <div class="w-full md:w-3/5 h-64 md:h-auto relative">
-                <img alt="Elkris Bio Health" class="w-full h-full object-cover" src="{{ asset('elkris_foods_Image.jpeg') }}"/>
+                <img alt="Elkris Bio Health" class="w-full h-full object-cover" src="{{ asset('sugar_alternative.jpeg') }}"/>
                 <div class="absolute top-4 left-4">
                     <span class="bg-primary-container text-on-primary text-caption font-bold px-4 py-1 rounded-full uppercase tracking-wider">Editor's Choice</span>
                 </div>
