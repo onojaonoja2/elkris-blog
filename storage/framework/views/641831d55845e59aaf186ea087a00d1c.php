@@ -1,17 +1,15 @@
-@extends('layouts.public')
+<?php $__env->startSection('title', 'Contact Us - Blood Sugar Friendly Foods - Elkris Bio Health'); ?>
+<?php $__env->startSection('meta_description', 'Get in touch with Elkris Bio Health Nigeria Limited. Contact us for blood sugar friendly foods inquiries, corporate office details, or send us a message.'); ?>
 
-@section('title', 'Contact Us - Blood Sugar Friendly Foods - Elkris Bio Health')
-@section('meta_description', 'Get in touch with Elkris Bio Health Nigeria Limited. Contact us for blood sugar friendly foods inquiries, corporate office details, or send us a message.')
-
-@push('seo')
+<?php $__env->startPush('seo'); ?>
 <meta property="og:title" content="Contact Us - Blood Sugar Friendly Foods - Elkris Bio Health">
 <meta property="og:description" content="Get in touch with Elkris Bio Health Nigeria Limited for blood sugar friendly foods inquiries.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="{{ url()->current() }}">
-@endpush
+<meta property="og:url" content="<?php echo e(url()->current()); ?>">
+<?php $__env->stopPush(); ?>
 
-@section('content')
-{{-- Hero --}}
+<?php $__env->startSection('content'); ?>
+
 <section class="bg-primary-container relative overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-r from-primary-container via-primary-container/95 to-secondary/80"></div>
     <div class="relative z-10 max-w-[1280px] mx-auto px-5 py-16 md:py-24 flex flex-col md:flex-row items-center gap-8">
@@ -26,10 +24,10 @@
     </div>
 </section>
 
-{{-- Contact Section --}}
+
 <section class="max-w-[1280px] mx-auto px-5 py-section-gap">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {{-- Contact Info --}}
+        
         <div>
             <h2 class="font-headline-md text-[32px] font-semibold text-primary-container mb-8">Our Office</h2>
 
@@ -70,39 +68,60 @@
             </div>
         </div>
 
-        {{-- Contact Form --}}
+        
         <div>
             <h2 class="font-headline-md text-[32px] font-semibold text-primary-container mb-8">Send Us a Message</h2>
 
             <div class="bg-white rounded-xl border border-surface-variant shadow-sm p-8">
-                @if(session('success'))
-                <div class="bg-primary-fixed/20 text-primary-fixed text-caption px-4 py-3 rounded-lg mb-6 border border-primary-fixed/30">✓ {{ session('success') }}</div>
-                @endif
+                <?php if(session('success')): ?>
+                <div class="bg-primary-fixed/20 text-primary-fixed text-caption px-4 py-3 rounded-lg mb-6 border border-primary-fixed/30">✓ <?php echo e(session('success')); ?></div>
+                <?php endif; ?>
 
                 <div class="newsletter-msg hidden"></div>
 
-                <form method="POST" action="{{ route('contact.store') }}" id="contact-form">
-                    @csrf
+                <form method="POST" action="<?php echo e(route('contact.store')); ?>" id="contact-form">
+                    <?php echo csrf_field(); ?>
                     <div class="space-y-5">
                         <div>
                             <label for="name" class="text-ui-label font-medium text-primary mb-1 block">Full Name</label>
-                            <input type="text" name="name" id="name" value="{{ old('name') }}" required
+                            <input type="text" name="name" id="name" value="<?php echo e(old('name')); ?>" required
                                 class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-ui-label text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary transition-all">
-                            @error('name') <p class="text-error text-caption mt-1">{{ $message }}</p> @enderror
+                            <?php $__errorArgs = ['name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <p class="text-error text-caption mt-1"><?php echo e($message); ?></p> <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                         </div>
 
                         <div>
                             <label for="email" class="text-ui-label font-medium text-primary mb-1 block">Email Address</label>
-                            <input type="email" name="email" id="email" value="{{ old('email') }}" required
+                            <input type="email" name="email" id="email" value="<?php echo e(old('email')); ?>" required
                                 class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-ui-label text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary transition-all">
-                            @error('email') <p class="text-error text-caption mt-1">{{ $message }}</p> @enderror
+                            <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <p class="text-error text-caption mt-1"><?php echo e($message); ?></p> <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                         </div>
 
                         <div>
                             <label for="message" class="text-ui-label font-medium text-primary mb-1 block">Message</label>
                             <textarea name="message" id="message" rows="6" required
-                                class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-ui-label text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary transition-all resize-y">{{ old('message') }}</textarea>
-                            @error('message') <p class="text-error text-caption mt-1">{{ $message }}</p> @enderror
+                                class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-ui-label text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary transition-all resize-y"><?php echo e(old('message')); ?></textarea>
+                            <?php $__errorArgs = ['message'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <p class="text-error text-caption mt-1"><?php echo e($message); ?></p> <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                         </div>
 
                         <button type="submit"
@@ -115,9 +134,9 @@
         </div>
     </div>
 </section>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     var form = document.getElementById('contact-form');
@@ -138,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var existingMsg = this.querySelector('.contact-msg');
         if (existingMsg) existingMsg.remove();
 
-        fetch('{{ route('contact.store') }}', {
+        fetch('<?php echo e(route('contact.store')); ?>', {
             method: 'POST',
             body: formData,
             headers: {
@@ -189,4 +208,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('layouts.public', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\Onoja\Documents\Elkris\Projects\elkris-blog\resources\views/blog/contact.blade.php ENDPATH**/ ?>

@@ -4,7 +4,7 @@
 @section('meta_description', $post->seo_description ?? $post->excerpt ?? '')
 
 @push('seo')
-<meta property="og:title" content="{{ $post->seo_title ?? $post->title }}">
+<meta property="og:title" content="{{ $post->seo_title ?? $post->title }} - Blood Sugar Friendly Foods">
 <meta property="og:description" content="{{ $post->seo_description ?? $post->excerpt ?? '' }}">
 <meta property="og:type" content="article">
 <meta property="og:url" content="{{ route('blog.show', $post) }}">
@@ -17,7 +17,8 @@
   "@@context": "https://schema.org",
   "@@type": "BlogPosting",
   "headline": "{{ $post->title }}",
-  "description": "{{ $post->excerpt ?? '' }}",
+  "description": "{{ $post->seo_description ?? $post->excerpt ?? '' }}",
+  "keywords": "blood sugar friendly foods, diabetes nutrition, {{ $post->category?->name ?? '' }}, healthy alternatives, low glycemic foods",
   "author": {
     "@@type": "Person",
     "name": "{{ $post->author?->name ?? 'Elkris Bio Health' }}"
@@ -26,7 +27,8 @@
   "dateModified": "{{ $post->updated_at->toIso8601String() }}",
   "publisher": {
     "@@type": "Organization",
-    "name": "Elkris Bio Health Nigeria Limited"
+    "name": "Elkris Bio Health Nigeria Limited",
+    "alternateName": "Home of Blood Sugar Friendly Alternative Foods"
   }
   @if($post->featured_image)
   ,"image": "{{ Storage::url($post->featured_image) }}"

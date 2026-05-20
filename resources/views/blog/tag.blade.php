@@ -1,12 +1,25 @@
 @extends('layouts.public')
 
-@section('title', '#' . $tag->name . ' - Elkris Bio Health')
-@section('meta_description', 'Articles tagged with ' . $tag->name)
+@section('title', '#' . $tag->name . ' - Blood Sugar Friendly Foods - Elkris Bio Health')
+@section('meta_description', 'Explore articles tagged with ' . $tag->name . ' on blood sugar friendly foods and wellness insights from Elkris Bio Health.')
 
 @push('seo')
-<meta property="og:title" content="#{{ $tag->name }} - Elkris Bio Health">
+<meta property="og:title" content="#{{ $tag->name }} - Blood Sugar Friendly Foods - Elkris Bio Health">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{{ url()->current() }}">
+<script type="application/ld+json">
+{
+  "@@context": "https://schema.org",
+  "@@type": "CollectionPage",
+  "name": "#{{ $tag->name }} - Elkris Bio Health",
+  "description": "Articles tagged with {{ $tag->name }} on blood sugar friendly foods and wellness insights",
+  "publisher": {
+    "@@type": "Organization",
+    "name": "Elkris Bio Health Nigeria Limited",
+    "alternateName": "Home of Blood Sugar Friendly Alternative Foods"
+  }
+}
+</script>
 @endpush
 
 @section('content')
