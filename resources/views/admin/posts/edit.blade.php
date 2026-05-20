@@ -92,6 +92,27 @@
             </div>
 
             <div>
+                <label class="font-ui-label font-bold text-primary mb-2 block">Video</label>
+                @if($post->video)
+                <div class="mb-3">
+                    <video src="{{ Storage::url($post->video) }}" controls class="rounded-lg w-full h-40 object-cover"></video>
+                    <label class="inline-flex items-center gap-2 mt-2 text-caption text-outline cursor-pointer hover:text-error transition-colors">
+                        <input type="checkbox" name="remove_video" value="1">
+                        Remove video
+                    </label>
+                </div>
+                @else
+                <div class="border-2 border-dashed border-outline-variant rounded-xl p-6 text-center cursor-pointer hover:border-secondary transition-colors" id="upload-video">
+                    <span class="material-symbols-outlined text-3xl text-outline mb-2">videocam</span>
+                    <p class="text-caption text-outline">Click to upload video</p>
+                </div>
+                <input type="file" name="video" id="video-input" class="hidden" accept="video/mp4,video/mov,video/avi,video/webm">
+                @error('video') <p class="text-error text-caption mt-1">{{ $message }}</p> @enderror
+                <video id="video-preview" class="hidden mt-3 rounded-lg w-full h-40 object-cover" controls></video>
+                @endif
+            </div>
+
+            <div>
                 <label class="font-ui-label font-bold text-primary mb-2 block">Featured Image</label>
                 <div class="border-2 border-dashed border-outline-variant rounded-xl p-6 text-center cursor-pointer hover:border-secondary transition-colors" id="upload-featured-image">
                     <span class="material-symbols-outlined text-3xl text-outline mb-2">add_photo_alternate</span>

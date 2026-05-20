@@ -52,6 +52,7 @@ class PostController extends Controller
             'tags.*' => 'exists:tags,id',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:'.min(5120, UploadedFile::getMaxFilesize() / 1024),
             'featured_image_caption' => 'nullable|max:255',
+            'video' => 'nullable|mimes:mp4,mov,avi,webm|max:'.min(102400, UploadedFile::getMaxFilesize() / 1024),
             'is_published' => 'boolean',
             'seo_title' => 'nullable|max:255',
             'seo_description' => 'nullable|max:320',
@@ -62,6 +63,11 @@ class PostController extends Controller
         if ($request->hasFile('featured_image')) {
             $path = $request->file('featured_image')->store('posts', 'public');
             $validated['featured_image'] = $path;
+        }
+
+        if ($request->hasFile('video')) {
+            $path = $request->file('video')->store('posts/videos', 's3');
+            $validated['video'] = $path;
         }
 
         if ($request->boolean('is_published')) {
@@ -108,8 +114,10 @@ class PostController extends Controller
             'tags.*' => 'exists:tags,id',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:'.min(5120, UploadedFile::getMaxFilesize() / 1024),
             'featured_image_caption' => 'nullable|max:255',
+            'video' => 'nullable|mimes:mp4,mov,avi,webm|max:'.min(102400, UploadedFile::getMaxFilesize() / 1024),
             'is_published' => 'boolean',
             'remove_image' => 'boolean',
+            'remove_video' => 'boolean',
             'seo_title' => 'nullable|max:255',
             'seo_description' => 'nullable|max:320',
         ]);
@@ -125,6 +133,19 @@ class PostController extends Controller
         if ($request->boolean('remove_image') && $post->featured_image) {
             Storage::disk('public')->delete($post->featured_image);
             $validated['featured_image'] = null;
+        }
+
+        if ($request->hasFile('video')) {
+            if ($post->video) {
+                Storage::disk('s3')->delete($post->video);
+            }
+            $path = $request->file('video')->store('posts/videos', 's3');
+            $validated['video'] = $path;
+        }
+
+        if ($request->boolean('remove_video') && $post->video) {
+            Storage::disk('s3')->delete($post->video);
+            $validated['video'] = null;
         }
 
         if (empty($validated['slug'])) {
@@ -153,6 +174,10 @@ class PostController extends Controller
 
         if ($post->featured_image) {
             Storage::disk('public')->delete($post->featured_image);
+        }
+
+        if ($post->video) {
+            Storage::disk('s3')->delete($post->video);
         }
 
         $post->tags()->detach();

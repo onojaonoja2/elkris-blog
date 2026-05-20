@@ -98,6 +98,18 @@
             </div>
 
             <div>
+                <label class="font-ui-label font-bold text-primary mb-2 block">Video</label>
+                <div class="border-2 border-dashed border-outline-variant rounded-xl p-6 text-center cursor-pointer hover:border-secondary transition-colors" id="upload-video">
+                    <span class="material-symbols-outlined text-3xl text-outline mb-2">videocam</span>
+                    <p class="text-caption text-outline">Click to upload video</p>
+                    <p class="text-caption text-outline">MP4, MOV, AVI, WebM (max 100MB)</p>
+                </div>
+                <input type="file" name="video" id="video-input" class="hidden" accept="video/mp4,video/mov,video/avi,video/webm">
+                @error('video') <p class="text-error text-caption mt-1">{{ $message }}</p> @enderror
+                <video id="video-preview" class="hidden mt-3 rounded-lg w-full h-40 object-cover" controls></video>
+            </div>
+
+            <div>
                 <label class="font-ui-label font-bold text-primary mb-2 block">Image Caption</label>
                 <input type="text" name="featured_image_caption" value="{{ old('featured_image_caption') }}" class="w-full border border-outline-variant rounded-lg px-4 py-3 text-ui-label text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary bg-surface-container-lowest" placeholder="Optional caption...">
             </div>

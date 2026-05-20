@@ -168,6 +168,27 @@ const initFeaturedImageUpload = () => {
     });
 };
 
+const initVideoUpload = () => {
+    const uploadBtn = document.getElementById('upload-video');
+    const fileInput = document.getElementById('video-input');
+    const preview = document.getElementById('video-preview');
+
+    if (!uploadBtn || !fileInput) return;
+
+    uploadBtn.addEventListener('click', () => fileInput.click());
+
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        const url = URL.createObjectURL(file);
+        if (preview) {
+            preview.src = url;
+            preview.classList.remove('hidden');
+        }
+    });
+};
+
 const initSlugGenerator = () => {
     const titleInput = document.getElementById('title');
     const slugInput = document.getElementById('slug');
@@ -221,6 +242,7 @@ const confirmPublish = () => {
 document.addEventListener('DOMContentLoaded', () => {
     initializeEditor();
     initFeaturedImageUpload();
+    initVideoUpload();
     initSlugGenerator();
     initAutoSave();
 });
