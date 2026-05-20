@@ -49,6 +49,10 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
             'report' => false,
+            'options' => [
+                'timeout' => 300,
+                'connect_timeout' => 60,
+            ],
         ],
 
         'local_public' => [

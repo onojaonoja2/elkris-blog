@@ -148,10 +148,27 @@ const initFeaturedImageUpload = () => {
     const uploadBtn = document.getElementById('upload-featured-image');
     const fileInput = document.getElementById('featured-image-input');
     const preview = document.getElementById('featured-image-preview');
+    const previewContainer = document.getElementById('featured-image-preview-container');
+    const removeBtn = document.getElementById('remove-featured-image');
+    const removeInput = document.getElementById('remove-featured-image-input');
 
-    if (!uploadBtn || !fileInput) return;
+    if (!uploadBtn) {
+        console.log('upload-featured-image not found');
+        return;
+    }
+    if (!fileInput) {
+        console.log('featured-image-input not found');
+        return;
+    }
 
-    uploadBtn.addEventListener('click', () => fileInput.click());
+    const handleUploadClick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        fileInput.click();
+    };
+
+    uploadBtn.addEventListener('mousedown', handleUploadClick);
+    uploadBtn.addEventListener('touchstart', handleUploadClick);
 
     fileInput.addEventListener('change', (e) => {
         const file = e.target.files?.[0];
@@ -163,19 +180,60 @@ const initFeaturedImageUpload = () => {
                 preview.src = event.target?.result;
                 preview.classList.remove('hidden');
             }
+            if (previewContainer) {
+                previewContainer.classList.remove('hidden');
+            }
+            if (removeInput) {
+                removeInput.value = '0';
+            }
         };
         reader.readAsDataURL(file);
     });
+
+    if (removeBtn) {
+        removeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            fileInput.value = '';
+            if (preview) {
+                preview.src = '';
+                preview.classList.add('hidden');
+            }
+            if (previewContainer) {
+                previewContainer.classList.add('hidden');
+            }
+            if (removeInput) {
+                removeInput.value = '1';
+            }
+        });
+    }
 };
 
 const initVideoUpload = () => {
     const uploadBtn = document.getElementById('upload-video');
     const fileInput = document.getElementById('video-input');
     const preview = document.getElementById('video-preview');
+    const previewContainer = document.getElementById('video-preview-container');
+    const removeBtn = document.getElementById('remove-video');
+    const removeInput = document.getElementById('remove-video-input');
 
-    if (!uploadBtn || !fileInput) return;
+    if (!uploadBtn) {
+        console.log('upload-video not found');
+        return;
+    }
+    if (!fileInput) {
+        console.log('video-input not found');
+        return;
+    }
 
-    uploadBtn.addEventListener('click', () => fileInput.click());
+    const handleUploadClick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        fileInput.click();
+    };
+
+    uploadBtn.addEventListener('mousedown', handleUploadClick);
+    uploadBtn.addEventListener('touchstart', handleUploadClick);
 
     fileInput.addEventListener('change', (e) => {
         const file = e.target.files?.[0];
@@ -186,7 +244,31 @@ const initVideoUpload = () => {
             preview.src = url;
             preview.classList.remove('hidden');
         }
+        if (previewContainer) {
+            previewContainer.classList.remove('hidden');
+        }
+        if (removeInput) {
+            removeInput.value = '0';
+        }
     });
+
+    if (removeBtn) {
+        removeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            fileInput.value = '';
+            if (preview) {
+                preview.src = '';
+                preview.classList.add('hidden');
+            }
+            if (previewContainer) {
+                previewContainer.classList.add('hidden');
+            }
+            if (removeInput) {
+                removeInput.value = '1';
+            }
+        });
+    }
 };
 
 const initSlugGenerator = () => {

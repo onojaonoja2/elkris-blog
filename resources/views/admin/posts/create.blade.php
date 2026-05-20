@@ -94,7 +94,14 @@
                 </div>
                 <input type="file" name="featured_image" id="featured-image-input" class="hidden" accept="image/jpeg,image/png,image/webp,image/gif">
                 @error('featured_image') <p class="text-error text-caption mt-1">{{ $message }}</p> @enderror
-                <img id="featured-image-preview" class="hidden mt-3 rounded-lg w-full h-40 object-cover" src="" alt="Preview">
+                <div id="featured-image-preview-container" class="hidden mt-3">
+                    <img id="featured-image-preview" class="rounded-lg w-full h-40 object-cover" src="" alt="Preview">
+                    <button type="button" id="remove-featured-image" class="mt-2 text-caption text-outline hover:text-error cursor-pointer transition-colors flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[16px]">delete</span>
+                        Remove image
+                    </button>
+                </div>
+                <input type="hidden" name="remove_featured_image" id="remove-featured-image-input" value="0">
             </div>
 
             <div>
@@ -106,7 +113,14 @@
                 </div>
                 <input type="file" name="video" id="video-input" class="hidden" accept="video/mp4,video/mov,video/avi,video/webm">
                 @error('video') <p class="text-error text-caption mt-1">{{ $message }}</p> @enderror
-                <video id="video-preview" class="hidden mt-3 rounded-lg w-full h-40 object-cover" controls></video>
+                <div id="video-preview-container" class="hidden mt-3">
+                    <video id="video-preview" class="rounded-lg w-full h-40 object-cover" controls></video>
+                    <button type="button" id="remove-video" class="mt-2 text-caption text-outline hover:text-error cursor-pointer transition-colors flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[16px]">delete</span>
+                        Remove video
+                    </button>
+                </div>
+                <input type="hidden" name="remove_video" id="remove-video-input" value="0">
             </div>
 
             <div>
