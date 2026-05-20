@@ -19,6 +19,7 @@ class Post extends Model
         'featured_image',
         'featured_image_caption',
         'video',
+        'video_position',
         'is_published',
         'published_at',
         'seo_title',

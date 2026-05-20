@@ -110,6 +110,11 @@
                 @error('video') <p class="text-error text-caption mt-1">{{ $message }}</p> @enderror
                 <video id="video-preview" class="hidden mt-3 rounded-lg w-full h-40 object-cover" controls></video>
                 @endif
+                <select name="video_position" class="w-full border border-outline-variant rounded-lg px-4 py-3 text-ui-label text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary bg-surface-container-lowest mt-3">
+                    <option value="end" @selected(old('video_position', $post->video_position) == 'end')>Display at end</option>
+                    <option value="top" @selected(old('video_position', $post->video_position) == 'top')>Display at top</option>
+                    <option value="middle" @selected(old('video_position', $post->video_position) == 'middle')>Display in middle</option>
+                </select>
             </div>
 
             <div>
