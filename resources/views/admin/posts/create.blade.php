@@ -102,6 +102,11 @@
                     </button>
                 </div>
                 <input type="hidden" name="remove_featured_image" id="remove-featured-image-input" value="0">
+                <select name="image_position" class="w-full border border-outline-variant rounded-lg px-4 py-3 text-ui-label text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary bg-surface-container-lowest mt-3">
+                    <option value="top" @selected(old('image_position') == 'top')>Display at top</option>
+                    <option value="middle" @selected(old('image_position') == 'middle')>Display in middle</option>
+                    <option value="end" @selected(old('image_position') == 'end')>Display at end</option>
+                </select>
             </div>
 
             <div>

@@ -127,6 +127,11 @@
                 @error('featured_image') <p class="text-error text-caption mt-1">{{ $message }}</p> @enderror
                 <img id="featured-image-preview" class="hidden mt-3 rounded-lg w-full h-40 object-cover" src="" alt="Preview">
                 <input type="text" name="featured_image_caption" value="{{ old('featured_image_caption', $post->featured_image_caption) }}" class="w-full border border-outline-variant rounded-lg px-4 py-3 text-ui-label text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary bg-surface-container-lowest mt-3" placeholder="Optional caption...">
+                <select name="image_position" class="w-full border border-outline-variant rounded-lg px-4 py-3 text-ui-label text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary bg-surface-container-lowest mt-3">
+                    <option value="top" @selected(old('image_position', $post->image_position) == 'top')>Display at top</option>
+                    <option value="middle" @selected(old('image_position', $post->image_position) == 'middle')>Display in middle</option>
+                    <option value="end" @selected(old('image_position', $post->image_position) == 'end')>Display at end</option>
+                </select>
             </div>
 
             @if($post->is_published)

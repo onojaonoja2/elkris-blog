@@ -71,7 +71,7 @@
 </div>
 
 {{-- Featured Image --}}
-@if($post->featured_image)
+@if($post->featured_image && $post->image_position === 'top')
 <div class="max-w-[1280px] mx-auto px-5 -mt-8 md:-mt-12">
 <div class="aspect-[21/9] rounded-xl overflow-hidden shadow-xl">
     <img alt="{{ $post->featured_image_caption ?? $post->title }}" class="w-full h-full object-cover" src="{{ Storage::url($post->featured_image) }}"/>
@@ -82,6 +82,7 @@
 </div>
 @endif
 
+@if(($post->featured_image && $post->image_position === 'top') || ($post->video && $post->video_position === 'top'))
 @if($post->video && $post->video_position === 'top')
 <div class="max-w-[1000px] mx-auto px-5 mt-8">
 <div class="rounded-xl overflow-hidden shadow-lg bg-black">
@@ -92,14 +93,23 @@
 </div>
 </div>
 @endif
+@endif
 
 {{-- Article Content --}}
 <article class="max-w-[800px] mx-auto px-5 mt-12 md:mt-16">
 <div class="font-article text-article-body-mobile md:text-article-body leading-relaxed text-on-surface dropcap [&_h2]:font-headline-md [&_h2]:text-[24px] md:[&_h2]:text-[32px] [&_h2]:font-semibold [&_h2]:text-primary [&_h2]:mt-8 md:[&_h2]:mt-12 [&_h2]:mb-4 [&_h2]:font-sans [&_h3]:font-headline-sm [&_h3]:text-[20px] md:[&_h3]:text-[24px] [&_h3]:font-semibold [&_h3]:text-primary [&_h3]:mt-6 md:[&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:font-sans [&_p]:mb-6 [&_ul]:mb-6 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:mb-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_blockquote]:border-l-4 [&_blockquote]:border-secondary [&_blockquote]:pl-6 [&_blockquote]:italic [&_blockquote]:text-on-surface-variant [&_blockquote]:my-8 [&_a]:text-secondary [&_a]:underline [&_a]:hover:text-secondary-fixed-dim [&_img]:rounded-xl [&_img]:my-8 [&_img]:w-full [&_pre]:bg-surface-container-high [&_pre]:rounded-xl [&_pre]:p-4 md:[&_pre]:p-6 [&_pre]:overflow-x-auto [&_pre]:mb-6 [&_code]:text-sm [&_code]:font-mono">
 @php
     $bodyContent = $post->body;
+    $insertions = [];
+
     if ($post->video && $post->video_position === 'middle') {
-        $videoHtml = '<div class="my-8 rounded-xl overflow-hidden shadow-lg bg-black"><video class="w-full" controls playsinline><source src="'.Storage::url($post->video).'" type="video/mp4">Your browser does not support the video tag.</video></div>';
+        $insertions[] = '<div class="my-8 rounded-xl overflow-hidden shadow-lg bg-black"><video class="w-full" controls playsinline><source src="'.Storage::url($post->video).'" type="video/mp4">Your browser does not support the video tag.</video></div>';
+    }
+    if ($post->featured_image && $post->image_position === 'middle') {
+        $insertions[] = '<div class="my-8 rounded-xl overflow-hidden shadow-xl"><img src="'.Storage::url($post->featured_image).'" alt="'.$post->featured_image_caption.'" class="w-full" /></div>';
+    }
+
+    if (count($insertions) > 0) {
         $halfPoint = strlen(strip_tags($bodyContent)) / 2;
         $paragraphs = preg_split('/<\/p>/i', $bodyContent);
         $cumulativeLength = 0;
@@ -113,21 +123,31 @@
         }
         $beforeParts = array_slice($paragraphs, 0, $insertIndex);
         $afterParts = array_slice($paragraphs, $insertIndex);
-        $bodyContent = implode('</p>', $beforeParts) . ($insertIndex > 0 ? '</p>' : '') . $videoHtml . implode('</p>', $afterParts);
+        $bodyContent = implode('</p>', $beforeParts) . ($insertIndex > 0 ? '</p>' : '') . implode('', $insertions) . implode('</p>', $afterParts);
     }
 @endphp
 {!! $bodyContent !!}
 </div>
 </article>
 
-@if($post->video && $post->video_position === 'end')
+@if(($post->featured_image && $post->image_position === 'end') || ($post->video && $post->video_position === 'end'))
 <div class="max-w-[1000px] mx-auto px-5 mt-12">
+@if($post->video && $post->video_position === 'end')
 <div class="rounded-xl overflow-hidden shadow-lg bg-black">
     <video class="w-full" controls playsinline>
         <source src="{{ Storage::url($post->video) }}" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 </div>
+@endif
+@if($post->featured_image && $post->image_position === 'end')
+<div class="mt-8 rounded-xl overflow-hidden shadow-xl">
+    <img alt="{{ $post->featured_image_caption ?? $post->title }}" class="w-full" src="{{ Storage::url($post->featured_image) }}"/>
+@if($post->featured_image_caption)
+<p class="text-caption text-outline mt-2 text-center">{{ $post->featured_image_caption }}</p>
+@endif
+</div>
+@endif
 </div>
 @endif
 
