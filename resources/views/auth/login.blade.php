@@ -16,13 +16,29 @@
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+            <div class="relative">
+                <input id="password" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm pr-12" type="password" name="password" required autocomplete="current-password" />
+                <button type="button" id="toggle-password" class="absolute inset-y-0 right-0 flex items-center pr-4 text-gray-400 hover:text-gray-600 focus:outline-none">
+                    <span class="material-symbols-outlined text-lg leading-none" id="eye-icon">visibility</span>
+                </button>
+            </div>
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
+
+        <script>
+            document.getElementById('toggle-password')?.addEventListener('click', function() {
+                const passwordInput = document.getElementById('password');
+                const eyeIcon = document.getElementById('eye-icon');
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    eyeIcon.textContent = 'visibility_off';
+                } else {
+                    passwordInput.type = 'password';
+                    eyeIcon.textContent = 'visibility';
+                }
+            });
+        </script>
 
         <!-- Remember Me -->
         <div class="block mt-4">

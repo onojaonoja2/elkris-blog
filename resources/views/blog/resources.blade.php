@@ -1,11 +1,11 @@
 @extends('layouts.public')
 
-@section('title', 'Health Resource Center - Elkris Bio Health')
-@section('meta_description', 'Download scientific guides, research papers, and health resources from Elkris Bio Health.')
+@section('title', 'Health Resource Center - Blood Sugar Friendly Foods - Elkris Bio Health')
+@section('meta_description', 'Download scientific guides, research papers, and health resources on blood sugar friendly foods from Elkris Bio Health.')
 
 @push('seo')
-<meta property="og:title" content="Health Resource Center - Elkris Bio Health">
-<meta property="og:description" content="Download scientific guides, research papers, and health resources.">
+<meta property="og:title" content="Health Resource Center - Blood Sugar Friendly Foods - Elkris Bio Health">
+<meta property="og:description" content="Download scientific guides, research papers, and health resources on blood sugar friendly foods.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{{ url()->current() }}">
 @endpush

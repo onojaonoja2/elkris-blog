@@ -1,11 +1,11 @@
 @extends('layouts.public')
 
-@section('title', 'All Topics - Elkris Bio Health')
-@section('meta_description', 'Browse all articles across every category on Elkris Bio Health')
+@section('title', 'All Topics - Blood Sugar Friendly Foods - Elkris Bio Health')
+@section('meta_description', 'Browse all articles on blood sugar friendly foods, diabetes nutrition, and wellness insights from Elkris Bio Health.')
 
 @push('seo')
-<meta property="og:title" content="All Topics - Elkris Bio Health">
-<meta property="og:description" content="Browse all articles across every category on Elkris Bio Health">
+<meta property="og:title" content="All Topics - Blood Sugar Friendly Foods - Elkris Bio Health">
+<meta property="og:description" content="Browse all articles on blood sugar friendly foods, diabetes nutrition, and wellness insights.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{{ url()->current() }}">
 @endpush
