@@ -38,7 +38,6 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        set_time_limit(300);
         $this->authorize('create', Post::class);
 
         $request->merge(['is_published' => $request->boolean('is_published')]);
@@ -113,7 +112,6 @@ class PostController extends Controller
 
     public function update(Request $request, Post $post)
     {
-        set_time_limit(300);
         $this->authorize('update', $post);
 
         $request->merge(['is_published' => $request->boolean('is_published')]);
@@ -132,7 +130,7 @@ class PostController extends Controller
             'video' => 'nullable|mimes:mp4,mov,avi,webm|max:'.min(102400, UploadedFile::getMaxFilesize() / 1024),
             'video_position' => 'nullable|in:top,middle,end',
             'is_published' => 'boolean',
-            'remove_image' => 'boolean',
+            'remove_featured_image' => 'boolean',
             'remove_video' => 'boolean',
             'seo_title' => 'nullable|max:255',
             'seo_description' => 'nullable|max:320',
@@ -146,7 +144,7 @@ class PostController extends Controller
             $validated['featured_image'] = $path;
         }
 
-        if ($request->boolean('remove_image') && $post->featured_image) {
+        if ($request->boolean('remove_featured_image') && $post->featured_image) {
             Storage::disk('public')->delete($post->featured_image);
             $validated['featured_image'] = null;
         }

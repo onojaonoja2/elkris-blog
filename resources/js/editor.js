@@ -91,14 +91,8 @@ const initializeEditor = () => {
         'italic': () => editor.chain().focus().toggleItalic().run(),
         'heading-2': () => editor.chain().focus().toggleHeading({ level: 2 }).run(),
         'heading-3': () => editor.chain().focus().toggleHeading({ level: 3 }).run(),
-        'bullet-list': () => {
-            editor.chain().focus().toggleBulletList().run();
-            console.log('[TipTap] toggleBulletList called. HTML:', editor.getHTML());
-        },
-        'ordered-list': () => {
-            editor.chain().focus().toggleOrderedList().run();
-            console.log('[TipTap] toggleOrderedList called. HTML:', editor.getHTML());
-        },
+        'bullet-list': () => editor.chain().focus().toggleBulletList().run(),
+        'ordered-list': () => editor.chain().focus().toggleOrderedList().run(),
         'blockquote': () => editor.chain().focus().toggleBlockquote().run(),
         'code-block': () => editor.chain().focus().toggleCodeBlock().run(),
         'horizontal-rule': () => editor.chain().focus().setHorizontalRule().run(),
@@ -152,14 +146,7 @@ const initFeaturedImageUpload = () => {
     const removeBtn = document.getElementById('remove-featured-image');
     const removeInput = document.getElementById('remove-featured-image-input');
 
-    if (!uploadBtn) {
-        console.log('upload-featured-image not found');
-        return;
-    }
-    if (!fileInput) {
-        console.log('featured-image-input not found');
-        return;
-    }
+    if (!uploadBtn || !fileInput) return;
 
     const handleUploadClick = (e) => {
         e.preventDefault();
@@ -217,14 +204,7 @@ const initVideoUpload = () => {
     const removeBtn = document.getElementById('remove-video');
     const removeInput = document.getElementById('remove-video-input');
 
-    if (!uploadBtn) {
-        console.log('upload-video not found');
-        return;
-    }
-    if (!fileInput) {
-        console.log('video-input not found');
-        return;
-    }
+    if (!uploadBtn || !fileInput) return;
 
     const handleUploadClick = (e) => {
         e.preventDefault();
