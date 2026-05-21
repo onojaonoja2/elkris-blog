@@ -63,7 +63,7 @@
             <div class="relative">
                 <img src="{{ Storage::url($post->featured_image) }}" alt="Current featured image" class="rounded-lg w-full h-40 object-cover">
                 <label class="inline-flex items-center gap-2 mt-2 text-caption text-outline cursor-pointer hover:text-error transition-colors">
-                    <input type="checkbox" name="remove_image" value="1">
+                    <input type="checkbox" name="remove_featured_image" value="1">
                     Remove image
                 </label>
             </div>
