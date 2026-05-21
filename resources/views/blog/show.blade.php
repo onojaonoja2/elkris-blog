@@ -74,7 +74,7 @@
 
 {{-- Featured Image --}}
 @if($post->featured_image && $post->image_position === 'top')
-<div class="max-w-[1280px] mx-auto px-5 -mt-8 md:-mt-12">
+<div class="max-w-[800px] mx-auto px-5 -mt-8 md:-mt-12">
 <div class="aspect-[21/9] rounded-xl overflow-hidden shadow-xl">
     <img alt="{{ $post->featured_image_caption ?? $post->title }}" class="w-full h-full object-cover" src="{{ Storage::url($post->featured_image) }}"/>
 </div>
@@ -86,7 +86,7 @@
 
 @if(($post->featured_image && $post->image_position === 'top') || ($post->video && $post->video_position === 'top'))
 @if($post->video && $post->video_position === 'top')
-<div class="max-w-[1000px] mx-auto px-5 mt-8">
+<div class="max-w-[800px] mx-auto px-5 mt-8">
 <div class="rounded-xl overflow-hidden shadow-lg bg-black">
     <video class="w-full" controls playsinline>
         <source src="{{ Storage::url($post->video) }}" type="video/mp4">
@@ -133,7 +133,7 @@
 </article>
 
 @if(($post->featured_image && $post->image_position === 'end') || ($post->video && $post->video_position === 'end'))
-<div class="max-w-[1000px] mx-auto px-5 mt-12">
+<div class="max-w-[800px] mx-auto px-5 mt-12">
 @if($post->video && $post->video_position === 'end')
 <div class="rounded-xl overflow-hidden shadow-lg bg-black">
     <video class="w-full" controls playsinline>
