@@ -56,7 +56,7 @@
                     <span class="material-symbols-outlined text-secondary text-3xl shrink-0">call</span>
                     <div>
                         <h3 class="font-ui-label font-bold text-primary mb-1">Phone</h3>
-                        <a href="tel:+2348173296383" class="text-secondary text-ui-label hover:underline">+2348173296383</a>
+                        <a href="tel:+2347078535649" class="text-secondary text-ui-label hover:underline">+2347078535649</a>
                         <p class="text-caption text-outline">Elkris Foods Corporate Office</p>
                     </div>
                 </div>
