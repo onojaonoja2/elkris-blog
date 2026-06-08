@@ -31,6 +31,11 @@
                 <span class="w-px h-6 bg-outline-variant mx-1"></span>
                 <button type="button" id="editor-horizontal-rule" class="p-2 rounded-lg text-outline hover:bg-surface-container-high transition-colors" title="Divider"><span class="material-symbols-outlined text-[18px]">horizontal_rule</span></button>
                 <span class="w-px h-6 bg-outline-variant mx-1"></span>
+                <button type="button" id="editor-insert-image" class="p-2 rounded-lg text-outline hover:bg-surface-container-high transition-colors" title="Insert Image"><span class="material-symbols-outlined text-[18px]">add_photo_alternate</span></button>
+                <button type="button" id="editor-insert-video" class="p-2 rounded-lg text-outline hover:bg-surface-container-high transition-colors" title="Insert Video"><span class="material-symbols-outlined text-[18px]">videocam</span></button>
+                <input type="file" id="inline-image-input" class="hidden" accept="image/jpeg,image/png,image/webp,image/gif">
+                <input type="file" id="inline-video-input" class="hidden" accept="video/mp4,video/mov,video/avi,video/webm">
+                <span class="w-px h-6 bg-outline-variant mx-1"></span>
                 <button type="button" id="editor-undo" class="p-2 rounded-lg text-outline hover:bg-surface-container-high transition-colors" title="Undo"><span class="material-symbols-outlined text-[18px]">undo</span></button>
                 <button type="button" id="editor-redo" class="p-2 rounded-lg text-outline hover:bg-surface-container-high transition-colors" title="Redo"><span class="material-symbols-outlined text-[18px]">redo</span></button>
             </div>
