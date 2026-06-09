@@ -88,6 +88,14 @@
         </div>
     </div>
 
+    {{-- Form Submit Loader --}}
+    <div id="form-loader" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl p-8 flex flex-col items-center gap-4 shadow-2xl">
+            <div class="w-10 h-10 border-4 border-secondary border-t-transparent rounded-full animate-spin"></div>
+            <p class="text-ui-label font-bold text-primary">Saving...</p>
+        </div>
+    </div>
+
     {{-- Global Publish Modal --}}
     <div x-show="publishModal.show" x-cloak class="fixed inset-0 z-50 flex items-center justify-center">
         <div class="fixed inset-0 bg-black/50" x-on:click="publishModal.show = false"></div>
