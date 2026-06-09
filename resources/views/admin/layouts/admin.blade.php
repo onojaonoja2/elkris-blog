@@ -69,7 +69,7 @@
                     class="px-5 py-2 rounded-lg border border-outline-variant text-on-surface-variant font-bold text-ui-label hover:bg-surface-container-high transition-all">
                     Cancel
                 </button>
-                <form method="POST" x-bind:action="confirmModal.action" class="inline">
+                <form method="POST" x-bind:action="confirmModal.action" class="inline" onsubmit="var l=document.getElementById('form-loader');var t=document.getElementById('form-loader-text');if(l){if(t)t.textContent='Deleting...';l.classList.remove('hidden')}">
                     @csrf
                     <input type="hidden" name="_method" x-bind:value="confirmModal.method">
                     <button type="submit"
