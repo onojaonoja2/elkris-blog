@@ -12,7 +12,7 @@ class MediaController extends Controller
     public function uploadImage(Request $request)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:'.min(5120, UploadedFile::getMaxFilesize() / 1024),
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:'.min(5120, (int) (UploadedFile::getMaxFilesize() / 1024)),
         ]);
 
         $path = $request->file('file')->store('posts/inline', 'public');
@@ -25,7 +25,7 @@ class MediaController extends Controller
     public function uploadVideo(Request $request)
     {
         $request->validate([
-            'file' => 'required|mimes:mp4,mov,avi,webm|max:'.min(102400, UploadedFile::getMaxFilesize() / 1024),
+            'file' => 'required|mimes:mp4,mov,avi,webm|max:'.min(102400, (int) (UploadedFile::getMaxFilesize() / 1024)),
         ]);
 
         $path = $request->file('file')->store('posts/videos/inline', 's3');
