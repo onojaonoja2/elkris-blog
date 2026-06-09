@@ -4,7 +4,7 @@
 @section('header', 'Create New Post')
 
 @section('content')
-<form method="POST" action="{{ route('admin.posts.store') }}" enctype="multipart/form-data" class="grid grid-cols-1 lg:grid-cols-3 gap-8" id="post-form" onsubmit="document.getElementById('form-loader')?.classList.remove('hidden')">
+<form method="POST" action="{{ route('admin.posts.store') }}" enctype="multipart/form-data" class="grid grid-cols-1 lg:grid-cols-3 gap-8" id="post-form" onsubmit="var l=document.getElementById('form-loader');var t=document.getElementById('form-loader-text');if(l){if(t)t.textContent='Creating...';l.classList.remove('hidden')}">
     @csrf
 
     {{-- Main Editor --}}

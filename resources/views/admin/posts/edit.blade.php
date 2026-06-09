@@ -64,16 +64,6 @@
                 <button type="submit" name="is_published" value="1" id="publish-submit-btn" class="hidden"></button>
             </div>
 
-            @if($post->featured_image)
-            <div class="relative">
-                <img src="{{ Storage::url($post->featured_image) }}" alt="Current featured image" class="rounded-lg w-full h-40 object-cover">
-                <label class="inline-flex items-center gap-2 mt-2 text-caption text-outline cursor-pointer hover:text-error transition-colors">
-                    <input type="checkbox" name="remove_featured_image" value="1">
-                    Remove image
-                </label>
-            </div>
-            @endif
-
             <div>
                 <label class="font-ui-label font-bold text-primary mb-2 block">Category</label>
                 <select name="category_id" class="w-full border border-outline-variant rounded-lg px-4 py-3 text-ui-label text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary bg-surface-container-lowest">
@@ -97,36 +87,20 @@
             </div>
 
             <div>
-                <label class="font-ui-label font-bold text-primary mb-2 block">Video</label>
-                @if($post->video)
+                <label class="font-ui-label font-bold text-primary mb-2 block">Featured Image</label>
+                @if($post->featured_image)
                 <div class="mb-3">
-                    <video src="{{ Storage::url($post->video) }}" controls class="rounded-lg w-full h-40 object-cover"></video>
+                    <img src="{{ Storage::url($post->featured_image) }}" alt="Current featured image" class="rounded-lg w-full h-40 object-cover">
                     <label class="inline-flex items-center gap-2 mt-2 text-caption text-outline cursor-pointer hover:text-error transition-colors">
-                        <input type="checkbox" name="remove_video" value="1">
-                        Remove video
+                        <input type="checkbox" name="remove_featured_image" value="1">
+                        Remove image
                     </label>
                 </div>
-                @else
-                <div class="border-2 border-dashed border-outline-variant rounded-xl p-6 text-center cursor-pointer hover:border-secondary transition-colors" id="upload-video">
-                    <span class="material-symbols-outlined text-3xl text-outline mb-2">videocam</span>
-                    <p class="text-caption text-outline">Click to upload video</p>
-                </div>
-                <input type="file" name="video" id="video-input" class="hidden" accept="video/mp4,video/mov,video/avi,video/webm">
-                @error('video') <p class="text-error text-caption mt-1">{{ $message }}</p> @enderror
-                <video id="video-preview" class="hidden mt-3 rounded-lg w-full h-40 object-cover" controls></video>
                 @endif
-                <select name="video_position" class="w-full border border-outline-variant rounded-lg px-4 py-3 text-ui-label text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary bg-surface-container-lowest mt-3">
-                    <option value="end" @selected(old('video_position', $post->video_position) == 'end')>Display at end</option>
-                    <option value="top" @selected(old('video_position', $post->video_position) == 'top')>Display at top</option>
-                    <option value="middle" @selected(old('video_position', $post->video_position) == 'middle')>Display in middle</option>
-                </select>
-            </div>
-
-            <div>
-                <label class="font-ui-label font-bold text-primary mb-2 block">Featured Image</label>
                 <div class="border-2 border-dashed border-outline-variant rounded-xl p-6 text-center cursor-pointer hover:border-secondary transition-colors" id="upload-featured-image">
                     <span class="material-symbols-outlined text-3xl text-outline mb-2">add_photo_alternate</span>
-                    <p class="text-caption text-outline">Click to change image</p>
+                    <p class="text-caption text-outline">{{ $post->featured_image ? 'Click to change image' : 'Click to upload image' }}</p>
+                    <p class="text-caption text-outline">JPEG, PNG, WebP (max 5MB)</p>
                 </div>
                 <input type="file" name="featured_image" id="featured-image-input" class="hidden" accept="image/jpeg,image/png,image/webp,image/gif">
                 @error('featured_image') <p class="text-error text-caption mt-1">{{ $message }}</p> @enderror
@@ -136,6 +110,32 @@
                     <option value="top" @selected(old('image_position', $post->image_position) == 'top')>Display at top</option>
                     <option value="middle" @selected(old('image_position', $post->image_position) == 'middle')>Display in middle</option>
                     <option value="end" @selected(old('image_position', $post->image_position) == 'end')>Display at end</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="font-ui-label font-bold text-primary mb-2 block">Video</label>
+                @if($post->video)
+                <div class="mb-3">
+                    <video src="{{ Storage::url($post->video) }}" controls class="rounded-lg w-full h-40 object-cover"></video>
+                    <label class="inline-flex items-center gap-2 mt-2 text-caption text-outline cursor-pointer hover:text-error transition-colors">
+                        <input type="checkbox" name="remove_video" value="1">
+                        Remove video
+                    </label>
+                </div>
+                @endif
+                <div class="border-2 border-dashed border-outline-variant rounded-xl p-6 text-center cursor-pointer hover:border-secondary transition-colors" id="upload-video">
+                    <span class="material-symbols-outlined text-3xl text-outline mb-2">videocam</span>
+                    <p class="text-caption text-outline">{{ $post->video ? 'Click to change video' : 'Click to upload video' }}</p>
+                    <p class="text-caption text-outline">MP4, MOV, AVI, WebM (max 100MB)</p>
+                </div>
+                <input type="file" name="video" id="video-input" class="hidden" accept="video/mp4,video/mov,video/avi,video/webm">
+                @error('video') <p class="text-error text-caption mt-1">{{ $message }}</p> @enderror
+                <video id="video-preview" class="hidden mt-3 rounded-lg w-full h-40 object-cover" controls></video>
+                <select name="video_position" class="w-full border border-outline-variant rounded-lg px-4 py-3 text-ui-label text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary bg-surface-container-lowest mt-3">
+                    <option value="end" @selected(old('video_position', $post->video_position) == 'end')>Display at end</option>
+                    <option value="top" @selected(old('video_position', $post->video_position) == 'top')>Display at top</option>
+                    <option value="middle" @selected(old('video_position', $post->video_position) == 'middle')>Display in middle</option>
                 </select>
             </div>
 
