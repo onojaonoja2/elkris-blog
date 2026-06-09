@@ -8,7 +8,6 @@ const initializeEditor = () => {
     const editorElement = document.getElementById('tiptap-editor');
     if (!editorElement) return false;
 
-    // Inject list styles for ProseMirror editor
     if (!document.getElementById('pm-list-styles')) {
         const style = document.createElement('style');
         style.id = 'pm-list-styles';
@@ -138,6 +137,102 @@ const initializeEditor = () => {
     return editor;
 };
 
+const initInlineImageUpload = (editor) => {
+    const btn = document.getElementById('editor-insert-image');
+    const fileInput = document.getElementById('inline-image-input');
+    if (!btn || !fileInput) return;
+
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        fileInput.click();
+    });
+
+    fileInput.addEventListener('change', async (e) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        showUploadLoader();
+        try {
+            const formData = new FormData();
+            formData.append('file', file);
+
+            const response = await fetch('/admin/posts/upload/image', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content,
+                },
+                body: formData,
+            });
+
+            if (!response.ok) throw new Error('Upload failed');
+
+            const data = await response.json();
+            editor.chain().focus().setImage({ src: data.url }).run();
+        } catch (err) {
+            console.error('Image upload failed:', err);
+        } finally {
+            hideUploadLoader();
+            fileInput.value = '';
+        }
+    });
+};
+
+const initInlineVideoUpload = (editor) => {
+    const btn = document.getElementById('editor-insert-video');
+    const fileInput = document.getElementById('inline-video-input');
+    if (!btn || !fileInput) return;
+
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        fileInput.click();
+    });
+
+    fileInput.addEventListener('change', async (e) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        showUploadLoader();
+        try {
+            const formData = new FormData();
+            formData.append('file', file);
+
+            const response = await fetch('/admin/posts/upload/video', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content,
+                },
+                body: formData,
+            });
+
+            if (!response.ok) throw new Error('Upload failed');
+
+            const data = await response.json();
+            editor.chain().focus().insertContent(
+                `<div class="my-4"><video src="${data.url}" controls class="w-full rounded-xl" playsinline></video></div>`
+            ).run();
+        } catch (err) {
+            console.error('Video upload failed:', err);
+        } finally {
+            hideUploadLoader();
+            fileInput.value = '';
+        }
+    });
+};
+
+const showUploadLoader = () => {
+    const loader = document.getElementById('upload-loader');
+    if (loader) {
+        loader.classList.remove('hidden');
+    }
+};
+
+const hideUploadLoader = () => {
+    const loader = document.getElementById('upload-loader');
+    if (loader) {
+        loader.classList.add('hidden');
+    }
+};
+
 const initFeaturedImageUpload = () => {
     const uploadBtn = document.getElementById('upload-featured-image');
     const fileInput = document.getElementById('featured-image-input');
@@ -161,6 +256,8 @@ const initFeaturedImageUpload = () => {
         const file = e.target.files?.[0];
         if (!file) return;
 
+        showUploadLoader();
+
         const reader = new FileReader();
         reader.onload = (event) => {
             if (preview) {
@@ -173,7 +270,9 @@ const initFeaturedImageUpload = () => {
             if (removeInput) {
                 removeInput.value = '0';
             }
+            hideUploadLoader();
         };
+        reader.onerror = () => hideUploadLoader();
         reader.readAsDataURL(file);
     });
 
@@ -219,6 +318,8 @@ const initVideoUpload = () => {
         const file = e.target.files?.[0];
         if (!file) return;
 
+        showUploadLoader();
+
         const url = URL.createObjectURL(file);
         if (preview) {
             preview.src = url;
@@ -230,6 +331,7 @@ const initVideoUpload = () => {
         if (removeInput) {
             removeInput.value = '0';
         }
+        hideUploadLoader();
     });
 
     if (removeBtn) {
@@ -302,7 +404,11 @@ const confirmPublish = () => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    initializeEditor();
+    const editor = initializeEditor();
+    if (editor) {
+        initInlineImageUpload(editor);
+        initInlineVideoUpload(editor);
+    }
     initFeaturedImageUpload();
     initVideoUpload();
     initSlugGenerator();

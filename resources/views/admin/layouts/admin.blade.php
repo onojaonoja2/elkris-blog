@@ -69,7 +69,7 @@
                     class="px-5 py-2 rounded-lg border border-outline-variant text-on-surface-variant font-bold text-ui-label hover:bg-surface-container-high transition-all">
                     Cancel
                 </button>
-                <form method="POST" x-bind:action="confirmModal.action" class="inline">
+                <form method="POST" x-bind:action="confirmModal.action" class="inline" onsubmit="var l=document.getElementById('form-loader');var t=document.getElementById('form-loader-text');if(l){if(t)t.textContent='Deleting...';l.classList.remove('hidden')}">
                     @csrf
                     <input type="hidden" name="_method" x-bind:value="confirmModal.method">
                     <button type="submit"
@@ -77,6 +77,22 @@
                         x-text="confirmModal.buttonText"></button>
                 </form>
             </div>
+        </div>
+    </div>
+
+    {{-- Upload Loader --}}
+    <div id="upload-loader" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl p-8 flex flex-col items-center gap-4 shadow-2xl">
+            <div class="w-10 h-10 border-4 border-secondary border-t-transparent rounded-full animate-spin"></div>
+            <p class="text-ui-label font-bold text-primary">Uploading...</p>
+        </div>
+    </div>
+
+    {{-- Form Submit Loader --}}
+    <div id="form-loader" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl p-8 flex flex-col items-center gap-4 shadow-2xl">
+            <div class="w-10 h-10 border-4 border-secondary border-t-transparent rounded-full animate-spin"></div>
+            <p class="text-ui-label font-bold text-primary" id="form-loader-text">Saving...</p>
         </div>
     </div>
 

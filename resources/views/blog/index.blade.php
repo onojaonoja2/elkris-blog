@@ -25,11 +25,21 @@
 <div class="w-full">
     {{-- Hero Section --}}
     <section class="max-w-[1280px] mx-auto px-5 pt-4 md:pt-6">
-        <div class="relative w-full rounded-xl overflow-hidden shadow-sm bg-surface-container-low flex flex-col md:flex-row min-h-[350px]">
-            <div class="w-full md:w-3/5 h-64 md:h-auto relative">
-                <img alt="Elkris Bio Health" class="w-full h-full object-cover" src="{{ asset('sugar_alternative.jpeg') }}"/>
-                <div class="absolute top-4 left-4">
+        <div class="relative w-full rounded-xl overflow-hidden shadow-sm bg-surface-container-low flex flex-col md:flex-row min-h-[350px] md:min-h-[500px]">
+            <div class="w-full md:w-3/5 h-80 md:h-auto relative overflow-hidden bg-surface-container-high" x-data="{ current: 0, images: ['{{ asset("blog_image1.jpeg") }}', '{{ asset("blog_image2.jpeg") }}'], interval: null }" x-init="interval = setInterval(() => { current = (current + 1) % images.length }, 5000); $el.addEventListener('mouseenter', () => clearInterval(interval)); $el.addEventListener('mouseleave', () => interval = setInterval(() => { current = (current + 1) % images.length }, 5000))">
+                <template x-for="(image, index) in images" :key="'bg-' + index">
+                    <img :src="image" alt="" class="absolute inset-0 w-full h-full object-cover blur-xl scale-105 transition-opacity duration-700" :class="index === current ? 'opacity-80' : 'opacity-0'" />
+                </template>
+                <template x-for="(image, index) in images" :key="index">
+                    <img :src="image" :alt="'Elkris Bio Health ' + (index + 1)" class="absolute inset-0 w-full h-full object-contain transition-opacity duration-700" :class="index === current ? 'opacity-100' : 'opacity-0'" />
+                </template>
+                <div class="absolute top-4 left-4 z-10">
                     <span class="bg-primary-container text-on-primary text-caption font-bold px-4 py-1 rounded-full uppercase tracking-wider">Editor's Choice</span>
+                </div>
+                <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+                    <template x-for="(image, index) in images" :key="'dot-' + index">
+                        <button @click="current = index; clearInterval(interval); interval = setInterval(() => { current = (current + 1) % images.length }, 5000)" class="w-2 h-2 rounded-full transition-all duration-300" :class="index === current ? 'bg-white w-6' : 'bg-white/50 hover:bg-white/70'"></button>
+                    </template>
                 </div>
             </div>
             <div class="w-full md:w-2/5 p-6 md:p-8 flex flex-col justify-center gap-4 relative @if(!is_null($featuredPost) && !empty($featuredPost->featured_image)) bg-cover bg-center before:absolute before:inset-0 before:bg-gradient-to-r before:from-primary-container/95 before:to-primary-container/80 @endif" @if(!is_null($featuredPost) && !empty($featuredPost->featured_image)) style="background-image: url('{{ Storage::url($featuredPost->featured_image) }}')" @endif>
