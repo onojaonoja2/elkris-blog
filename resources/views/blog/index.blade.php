@@ -28,9 +28,8 @@
         <div class="relative w-full rounded-xl overflow-hidden shadow-sm bg-surface-container-low flex flex-col md:flex-row min-h-[350px] md:min-h-[500px]">
             <div class="w-full md:w-3/5 h-80 md:h-auto relative overflow-hidden bg-surface-container-high" x-data="{ current: 0, images: ['{{ asset("blog_image1.jpeg") }}', '{{ asset("blog_image2.jpeg") }}'], interval: null }" x-init="interval = setInterval(() => { current = (current + 1) % images.length }, 5000); $el.addEventListener('mouseenter', () => clearInterval(interval)); $el.addEventListener('mouseleave', () => interval = setInterval(() => { current = (current + 1) % images.length }, 5000))">
                 <template x-for="(image, index) in images" :key="'bg-' + index">
-                    <img :src="image" alt="" class="absolute inset-0 w-full h-full object-cover blur-[100px] scale-110 transition-opacity duration-700" :class="index === current ? 'opacity-100' : 'opacity-0'" />
+                    <img :src="image" alt="" class="absolute inset-0 w-full h-full object-cover blur-xl scale-105 transition-opacity duration-700" :class="index === current ? 'opacity-80' : 'opacity-0'" />
                 </template>
-                <div class="absolute inset-0 bg-surface-container-high/60 pointer-events-none"></div>
                 <template x-for="(image, index) in images" :key="index">
                     <img :src="image" :alt="'Elkris Bio Health ' + (index + 1)" class="absolute inset-0 w-full h-full object-contain transition-opacity duration-700" :class="index === current ? 'opacity-100' : 'opacity-0'" />
                 </template>
