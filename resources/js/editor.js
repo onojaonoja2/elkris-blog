@@ -170,7 +170,7 @@ const initInlineImageUpload = (editor) => {
             editor.chain().focus().setImage({ src: data.url }).run();
         } catch (err) {
             console.error('Image upload failed:', err);
-            alert('Failed to upload image. Please try again.');
+            showErrorToast('Failed to upload image. Please try again.');
         } finally {
             hideUploadLoader();
             fileInput.value = '';
@@ -213,12 +213,22 @@ const initInlineVideoUpload = (editor) => {
             ).run();
         } catch (err) {
             console.error('Video upload failed:', err);
-            alert('Failed to upload video. Please try again.');
+            showErrorToast('Failed to upload video. Please try again.');
         } finally {
             hideUploadLoader();
             fileInput.value = '';
         }
     });
+};
+
+const showErrorToast = (message) => {
+    const toast = document.getElementById('error-toast');
+    if (!toast) return;
+    toast.textContent = message;
+    toast.classList.remove('hidden');
+    setTimeout(() => {
+        toast.classList.add('hidden');
+    }, 4000);
 };
 
 const showUploadLoader = () => {
