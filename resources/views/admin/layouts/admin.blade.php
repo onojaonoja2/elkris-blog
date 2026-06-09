@@ -96,6 +96,9 @@
         </div>
     </div>
 
+    {{-- Error Toast --}}
+    <div id="error-toast" class="hidden fixed top-4 right-4 z-[110] bg-error text-white px-6 py-3 rounded-lg shadow-xl text-ui-label font-medium transition-all duration-300 max-w-sm"></div>
+
     {{-- Global Publish Modal --}}
     <div x-show="publishModal.show" x-cloak class="fixed inset-0 z-50 flex items-center justify-center">
         <div class="fixed inset-0 bg-black/50" x-on:click="publishModal.show = false"></div>
